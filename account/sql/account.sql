@@ -1,5 +1,5 @@
 set names utf8;
-set foreign_key checks = 0;
+set foreign_key_checks = 0;
 drop database if exists account;
 create database if not exists account;
 use account;
@@ -23,5 +23,4 @@ authority int(1),
 delete_flg int(1),
 registered_time datetime,
 update_time datetime
-
 );
