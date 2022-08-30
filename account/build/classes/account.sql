@@ -7,7 +7,7 @@ use account;
 drop table if exists login_user_transaction;
 
 create table login_user_transaction(
-id int(100),
+id int(100) not null primary key auto_increment,
 family_name varchar(100),
 last_name varchar(100),
 family_name_kana varchar(100),
