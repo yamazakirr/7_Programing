@@ -1,11 +1,13 @@
 package com.diworksdev.account.action;
 
+import java.util.ArrayList;
 import java.util.Map;
-import org.apache.struts2.interceptor.SessionAware;
-import com.opensymphony.xwork2.ActionSupport;
-
-import java.util.regex.Pattern;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.apache.struts2.interceptor.SessionAware;
+
+import com.opensymphony.xwork2.ActionSupport;
 
 public class RegistConfirmAction extends ActionSupport implements SessionAware{
 
@@ -30,11 +32,21 @@ public class RegistConfirmAction extends ActionSupport implements SessionAware{
 
 	private String errorMessage;
 
+
+//	エラー用のフィールド
+	private String familyNameErrorMessage;
+//	以降に各項目のフィールドを追加予定----------------------
+
+
+
+//	--------------------------------------------
+
+
+
+
 //	メソッド一覧
 	public String execute(){
-		System.out.println("①");
 		String result = SUCCESS;
-
 
 		if(!(familyName.equals("")) && !(lastName.equals(""))){
 
@@ -53,10 +65,7 @@ public class RegistConfirmAction extends ActionSupport implements SessionAware{
 				this.authorityText = "管理者";
 			}
 
-//			削除フラグ判定処理？
-
-
-
+//			Mapに値を格納
 			session.put("familyName", familyName);
 			session.put("lastName", lastName);
 			session.put("familyNameKana", familyNameKana);
@@ -69,23 +78,28 @@ public class RegistConfirmAction extends ActionSupport implements SessionAware{
 			session.put("address1", address1);
 			session.put("address2", address2);
 			session.put("authority", authority);
+
+
+//			項目ごとのエラーチェック
+			String familyNameErrorMessage = errorCheck(regexHiraKan,familyName);
+			errorCheckLists.add(familyNameErrorMessage);
+//			以降に各項目ごとに処理を追加する----------------------
+
+
+
+//			--------------------------------------------
+
+
+//			全体のエラーチェック
+			int s = errorCheckAll();
+			if(s == 0){
+				result = SUCCESS;
+			}
+
 		}else{
 			setErrorMessage("未入力の項目があります。");
 			result = ERROR;
 		}
-//		エラー判定の処理を追加予定。JavaScriptで追加？
-
-		public String textError(){
-			String regexHiraKan = "^[ぁ-ん一-龠]*$";
-			Pattern p = Pattern.compile(regexHiraKan);
-			Matcher m = p.matcher(familyName);
-			System.out.println(m.find());
-
-			return "s";
-		}
-
-
-
 
 // genderの処理を記述する
 
@@ -93,6 +107,70 @@ public class RegistConfirmAction extends ActionSupport implements SessionAware{
 	}
 
 
+
+
+
+//	■項目ごとのエラー判定処理
+
+//		checkTextErrorMessage = "": エラーなし
+//		checkTextErrorMessage = "ひらがなと漢字のみを入力が出来ます。": ひらがなと漢字以外の文字がある
+//		checkTextErrorMessage = "入力必須項目です。": 入力されていない
+
+	public String errorCheck(String regex,String checkText){
+		String checkTextErrorMessage = "";
+
+		if(!(checkText == null) && !(checkText.equals(""))){
+			boolean checkResult = textError(regex,checkText);
+			if(checkResult == true){
+				System.out.println("familyNameCheck :"+checkResult);
+				checkTextErrorMessage = "";
+
+			}else{
+				System.out.println("familyNameCheck :"+checkResult);
+				checkTextErrorMessage = "ひらがなと漢字のみを入力が出来ます。";
+			}
+//		入力欄が空欄の場合
+		}else if((checkText == null) || (checkText.equals(""))){
+			checkTextErrorMessage = "入力必須項目です。";
+		}
+
+		return checkTextErrorMessage;
+	}
+
+
+//	■入力エラー判定処理
+	String regexHiraKan = "^[ぁ-ん一-龠]*$";
+//	以降に英数字、半角判定の変数を追加予定----------------------
+
+
+//	--------------------------------------------
+
+	public boolean textError(String regex, String text){
+
+		Pattern p = Pattern.compile(regex);
+		Matcher m = p.matcher(text);
+		boolean result = m.find();
+
+		return result;
+	}
+
+//	■項目全体のエラー判定処理
+//	errorCount = 0 : 項目全体でエラーなし
+
+	ArrayList<String> errorCheckLists = new ArrayList<>();
+	int successCount = 0;
+	int errorCount = 0;
+
+	public int errorCheckAll(){
+		for(String errorCheckList: errorCheckLists){
+			if(errorCheckList == ""){
+				successCount += successCount + 1;
+			}else{
+				errorCount += errorCount + 1;
+			}
+		}
+		return errorCount;
+	}
 
 
 //	getterとsetter
@@ -196,6 +274,13 @@ public class RegistConfirmAction extends ActionSupport implements SessionAware{
 	}
 	public void setErrorMessage(String errorMessage){
 		this.errorMessage = errorMessage;
+	}
+
+	public String getFamilyNameErrorMessage(){
+		return familyNameErrorMessage;
+	}
+	public void setFamilyNameErrorMessage(String familyNameErrorMessage){
+		this.familyNameErrorMessage = familyNameErrorMessage;
 	}
 
 //	@Override
