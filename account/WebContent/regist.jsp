@@ -32,9 +32,11 @@
           </td>
           <td>
             <input type="text" class="text" name="familyName" maxlength="10" value="たなか"/><br>
-
-            	<s:property value="familyNameErrorMessage"/>
-
+            <div class="errorMessage">
+				<s:if test="familyNameErrorMessage != null">
+	            	<s:property value="familyNameErrorMessage"/>
+				</s:if>
+            </div>
           </td>
         </tr>
         <tr>
@@ -42,7 +44,12 @@
             <label>名前（名）</label>
           </td>
           <td>
-            <input type="text" class="text" name="lastName" maxlength="10" value="たろう"/>
+            <input type="text" class="text" name="lastName" maxlength="10" value="たろう"/><br>
+            <div class="errorMessage">
+	            <s:if test="lastNameErrorMessage != null">
+	            	<s:property value="lastNameErrorMessage"/>
+				</s:if>
+            </div>
           </td>
         </tr>
         <tr>
@@ -50,7 +57,12 @@
             <label>カナ（姓）</label>
           </td>
           <td>
-            <input type="text" class="text" name="familyNameKana" maxlength="10" value="タナカ"/>
+            <input type="text" class="text" name="familyNameKana" maxlength="10" value="タナカ"/><br>
+            <div class="errorMessage">
+	            <s:if test="familyNameKanaErrorMessage != null">
+	            	<s:property value="familyNameKanaErrorMessage"/>
+				</s:if>
+            </div>
           </td>
         </tr>
         <tr>
@@ -58,7 +70,12 @@
             <label>カナ（名）</label>
           </td>
           <td>
-            <input type="text" class="text" name="lastNameKana" maxlength="10" value="タロウ"/>
+            <input type="text" class="text" name="lastNameKana" maxlength="10" value="タロウ"/><br>
+            <div class="errorMessage">
+	            <s:if test="lastNameKanaErrorMessage != null">
+	            	<s:property value="lastNameKanaErrorMessage"/>
+				</s:if>
+            </div>
           </td>
         </tr>
         <tr>
@@ -66,7 +83,12 @@
             <label>メールアドレス</label>
           </td>
           <td>
-            <input type="text" class="text" name="mail" maxlength="100" value="test@gmail.com"/>
+            <input type="text" class="text" name="mail" maxlength="100" value="test@gmail.com"/><br>
+            <div class="errorMessage">
+	            <s:if test="mailErrorMessage != null">
+	            	<s:property value="mailErrorMessage"/>
+				</s:if>
+            </div>
           </td>
         </tr>
         <tr>
@@ -74,7 +96,12 @@
             <label>パスワード</label>
           </td>
           <td>
-            <input type="text" class="text" name="password" maxlength="10" value="ssssss"/>
+            <input type="text" class="text" name="password" maxlength="10" value="ssssss"/><br>
+            <div class="errorMessage">
+	            <s:if test="passwordErrorMessage != null">
+	            	<s:property value="passwordErrorMessage"/>
+				</s:if>
+            </div>
           </td>
         </tr>
         <tr>
@@ -91,7 +118,12 @@
             <label>郵便番号</label>
           </td>
           <td>
-            <input type="text" class="text" name="postalCode" maxlength="7" value="12345"/>
+            <input type="text" class="text" name="postalCode" maxlength="7" value="12345"/><br>
+            <div class="errorMessage">
+	            <s:if test="postalCodedErrorMessage != null">
+	            	<s:property value="postalCodedErrorMessage"/>
+				</s:if>
+            </div>
           </td>
         </tr>
         <tr>
@@ -155,7 +187,12 @@
             <label>住所（市区町村）</label>
           </td>
           <td>
-            <input type="text" class="text" name="address1" maxlength="10" value="旭川市"/>
+            <input type="text" class="text" name="address1" maxlength="10" value="旭川市"/><br>
+            <div class="errorMessage">
+	            <s:if test="address1ErrorMessage != null">
+	            	<s:property value="address1ErrorMessage"/>
+				</s:if>
+            </div>
           </td>
         </tr>
         <tr>
@@ -164,6 +201,11 @@
           </td>
           <td>
             <input type="text" class="text" name="address2" maxlength="100" value="アイウエオ1-2-3"/>
+            <div class="errorMessage">
+	            <s:if test="address2ErrorMessage != null">
+	            	<s:property value="address2ErrorMessage"/>
+				</s:if>
+            </div>
           </td>
         </tr>
         <tr>

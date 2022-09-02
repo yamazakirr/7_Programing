@@ -30,3 +30,6 @@ div .b{
 	text-align:center;
 	height:100px;
 }
+.errorMessage{
+	color:red;
+}

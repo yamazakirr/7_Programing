@@ -94,27 +94,27 @@ public class RegistConfirmAction extends ActionSupport implements SessionAware{
 
 
 //			項目ごとのエラーチェック
-			String familyNameErrorMessage = errorCheck(regexHiraKan,familyName);
-			errorCheckLists.add(familyNameErrorMessage);
+			this.familyNameErrorMessage = errorCheck(regexHiraKan,familyName);
+			errorCheckLists.add(this.familyNameErrorMessage);
 //			以降に各項目ごとに処理を追加する----------------------
-			String lastNameErrorMessage = errorCheck(regexHiraKan, lastName);
-			errorCheckLists.add(lastNameErrorMessage);
-			String familyNameKanaErrorMessage = errorCheck(regexKana, familyNameKana);
-			errorCheckLists.add(familyNameKanaErrorMessage);
-			String lastNameKanaErrorMessage = errorCheck(regexKana, lastNameKana);
-			errorCheckLists.add(lastNameKanaErrorMessage);
-			String passwordErrorMessage = errorCheck(regexNumAl, password);
-			errorCheckLists.add(passwordErrorMessage);
-			String mailErrorMessage = errorCheck(regexMail, mail);
-			errorCheckLists.add(mailErrorMessage);
+			this.lastNameErrorMessage = errorCheck(regexHiraKan, lastName);
+			errorCheckLists.add(this.lastNameErrorMessage);
+			this.familyNameKanaErrorMessage = errorCheck(regexKana, familyNameKana);
+			errorCheckLists.add(this.familyNameKanaErrorMessage);
+			this.lastNameKanaErrorMessage = errorCheck(regexKana, lastNameKana);
+			errorCheckLists.add(this.lastNameKanaErrorMessage);
+			this.passwordErrorMessage = errorCheck(regexNumAl, password);
+			errorCheckLists.add(this.passwordErrorMessage);
+			this.mailErrorMessage = errorCheck(regexMail, mail);
+			errorCheckLists.add(this.mailErrorMessage);
 
-			String postalCodeErrorMessage = errorCheck(regexNum, String.valueOf(postalCode));
-			errorCheckLists.add(postalCodeErrorMessage);
+			this.postalCodeErrorMessage = errorCheck(regexNum, String.valueOf(postalCode));
+			errorCheckLists.add(this.postalCodeErrorMessage);
 
-			String address1ErrorMessage = errorCheck(regexAddress, address1);
-			errorCheckLists.add(address1ErrorMessage);
-			String address2ErrorMessage = errorCheck(regexAddress, address2);
-			errorCheckLists.add(address2ErrorMessage);
+			this.address1ErrorMessage = errorCheck(regexAddress, address1);
+			errorCheckLists.add(this.address1ErrorMessage);
+			this.address2ErrorMessage = errorCheck(regexAddress, address2);
+			errorCheckLists.add(this.address2ErrorMessage);
 
 			System.out.println("errorCheckLists :"+errorCheckLists);
 
@@ -223,9 +223,9 @@ public class RegistConfirmAction extends ActionSupport implements SessionAware{
 	public int errorCheckAll(){
 		for(String errorCheckList: errorCheckLists){
 			if(errorCheckList == ""){
-				successCount += successCount + 1;
+				successCount = successCount + 1;
 			}else{
-				errorCount += errorCount + 1;
+				errorCount += 1;
 			}
 		}
 		return errorCount;
