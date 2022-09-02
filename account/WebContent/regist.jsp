@@ -31,7 +31,10 @@
             <label>名前（姓）</label>
           </td>
           <td>
-            <input type="text" class="text" name="familyName" maxlength="10" value="たなか"/>
+            <input type="text" class="text" name="familyName" maxlength="10" value="たなか"/><br>
+
+            	<s:property value="familyNameErrorMessage"/>
+
           </td>
         </tr>
         <tr>
