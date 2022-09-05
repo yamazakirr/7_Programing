@@ -21,6 +21,7 @@ public class RegistCompleteDAO {
 			String mail, String password, String gender, String postalCode, String prefecture, String address1,
 			String address2, String authorityNum) throws SQLException{
 
+
 		try{
 
 		System.out.println("familyName "+familyName);
@@ -46,6 +47,8 @@ public class RegistCompleteDAO {
 		preparedStatement.setString(13, dateUtil.getDate());
 
 		preparedStatement.execute();
+
+
 
 		}catch(Exception e){
 			e.printStackTrace();

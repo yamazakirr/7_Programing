@@ -71,7 +71,7 @@
             <label>パスワード</label>
           </td>
           <td>
-				<s:property value="password"/>
+				<s:property value="passwordText"/>
           </td>
         </tr>
         <tr>

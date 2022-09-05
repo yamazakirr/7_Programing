@@ -1,5 +1,7 @@
 package com.diworksdev.account.action;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.Map;
 
@@ -24,13 +26,32 @@ public class RegistCompleteAction extends ActionSupport implements SessionAware{
 	private String address1;
 	private String address2;
 	private String authority;
+	private int authorityNum;
 
 	private String errorMessage;
 
 	private RegistCompleteDAO registCompleteDAO = new RegistCompleteDAO();
 
 	public String execute() throws SQLException{
-		registCompleteDAO.createUser(session.get("familyName").toString(),
+
+//		■パスワードをハッシュ化する処理================
+		try{
+			String passwordHash = new String(hashPassword(session.get("password").toString()));
+			session.put("password",passwordHash);
+
+
+			String passwordHash1 = new String(hashPassword(session.get("password").toString()));
+
+			System.out.println();
+			System.out.println("password :"+ session.get("password"));
+			System.out.println("password :"+ passwordHash1);
+
+		}catch(NoSuchAlgorithmException e){
+			e.printStackTrace();
+		}
+//		=========================================
+
+			registCompleteDAO.createUser(session.get("familyName").toString(),
 				session.get("lastName").toString(),
 				session.get("familyNameKana").toString(),
 				session.get("lastNameKana").toString(),
@@ -41,15 +62,28 @@ public class RegistCompleteAction extends ActionSupport implements SessionAware{
 				session.get("prefecture").toString(),
 				session.get("address1").toString(),
 				session.get("address2").toString(),
-				session.get("authorityNum").toString()
+				session.get("authority").toString()
 				);
+
 
 		String result = SUCCESS;
 		return result;
+
 	}
 
 
-//	getterとsetter
+
+//	■パスワードのハッシュ化するメソッド
+	public byte[] hashPassword(String password) throws NoSuchAlgorithmException{
+		MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+
+		byte[] b = password.getBytes();
+		return messageDigest.digest(b);
+	}
+
+
+
+//	■getterとsetter
 	public int getId(){
 		return id;
 	}
@@ -128,6 +162,12 @@ public class RegistCompleteAction extends ActionSupport implements SessionAware{
 	}
 	public void setAuthority(String authority){
 		this.authority = authority;
+	}
+	public int getAuthorityNum(){
+		return authorityNum;
+	}
+	public void setAuthorityNum(int authorityNum){
+		this.authorityNum = authorityNum;
 	}
 
 	public String getErrorMessage(){

@@ -21,6 +21,8 @@ public class RegistConfirmAction extends ActionSupport implements SessionAware{
 	private String lastNameKana;
 	private String mail;
 	private String password;
+	private String passwordText = "";
+
 	private int gender;
 	private String genderType;
 	private int postalCode;
@@ -61,9 +63,8 @@ public class RegistConfirmAction extends ActionSupport implements SessionAware{
 	public String execute(){
 		String result = SUCCESS;
 
-		if(!(familyName.equals("")) && !(lastName.equals(""))){
 
-//			性別判定処理
+//			■性別判定処理
 			if(gender == 0){
 				this.genderType = "男";
 			}else if(gender == 1){
@@ -71,14 +72,21 @@ public class RegistConfirmAction extends ActionSupport implements SessionAware{
 			}
 			System.out.println("gender "+gender);
 
-//			権限判定処理
+//			■権限判定処理
 			if(authority==0){
 				this.authorityText = "一般";
 			}else if(authority==1){
 				this.authorityText = "管理者";
 			}
 
-//			Mapに値を格納
+//			■パスワード黒まる表示用の処理
+			int passwordNum = password.length();
+			for(int i=0; i < passwordNum; i++){
+				this.passwordText += "●";
+			}
+
+
+//			■Mapに値を格納
 			session.put("familyName", familyName);
 			session.put("lastName", lastName);
 			session.put("familyNameKana", familyNameKana);
@@ -91,22 +99,28 @@ public class RegistConfirmAction extends ActionSupport implements SessionAware{
 			session.put("address1", address1);
 			session.put("address2", address2);
 			session.put("authority", authority);
+			session.put("authority", authority);
+
+			System.out.println();
+			System.out.println("authority : "+authority);
+			System.out.println(session);
 
 
-//			項目ごとのエラーチェック
+//			■項目ごとのエラーチェック
+//			※errorCheckメソッドの呼び出し順を変える際には「checkTextErrorMessage」の内容を変更する必要あり
+
 			this.familyNameErrorMessage = errorCheck(regexHiraKan,familyName);
 			errorCheckLists.add(this.familyNameErrorMessage);
-//			以降に各項目ごとに処理を追加する----------------------
 			this.lastNameErrorMessage = errorCheck(regexHiraKan, lastName);
 			errorCheckLists.add(this.lastNameErrorMessage);
 			this.familyNameKanaErrorMessage = errorCheck(regexKana, familyNameKana);
 			errorCheckLists.add(this.familyNameKanaErrorMessage);
 			this.lastNameKanaErrorMessage = errorCheck(regexKana, lastNameKana);
 			errorCheckLists.add(this.lastNameKanaErrorMessage);
-			this.passwordErrorMessage = errorCheck(regexNumAl, password);
-			errorCheckLists.add(this.passwordErrorMessage);
 			this.mailErrorMessage = errorCheck(regexMail, mail);
 			errorCheckLists.add(this.mailErrorMessage);
+			this.passwordErrorMessage = errorCheck(regexNumAl, password);
+			errorCheckLists.add(this.passwordErrorMessage);
 
 			this.postalCodeErrorMessage = errorCheck(regexNum, String.valueOf(postalCode));
 			errorCheckLists.add(this.postalCodeErrorMessage);
@@ -117,15 +131,9 @@ public class RegistConfirmAction extends ActionSupport implements SessionAware{
 			errorCheckLists.add(this.address2ErrorMessage);
 
 			System.out.println("errorCheckLists :"+errorCheckLists);
-
-
-
-
-
 //			--------------------------------------------
 
-
-//			全体のエラーチェック
+//			■全体のエラーチェック
 			int s = errorCheckAll();
 			if(s == 0){
 				result = SUCCESS;
@@ -134,19 +142,8 @@ public class RegistConfirmAction extends ActionSupport implements SessionAware{
 				result = ERROR;
 				System.out.println("result :"+result);
 			}
-
-		}else{
-			setErrorMessage("未入力の項目があります。");
-			result = ERROR;
-		}
-
-// genderの処理を記述する
-
 		return result;
 	}
-
-
-
 
 
 //	■項目ごとのエラー判定処理
@@ -155,37 +152,136 @@ public class RegistConfirmAction extends ActionSupport implements SessionAware{
 //		checkTextErrorMessage = "ひらがなと漢字のみを入力が出来ます。": ひらがなと漢字以外の文字がある
 //		checkTextErrorMessage = "入力必須項目です。": 入力されていない
 
+	int errorCheckTextNum = 0;
+
 	public String errorCheck(String regex,String checkText){
 		System.out.println("regex :"+regex);
 		System.out.println("checkText :"+checkText);
 		String checkTextErrorMessage = "";
 
-		if(!(checkText == null) && !(checkText.equals(""))){
-			boolean checkResult = textError(regex,checkText);
-			if(checkResult == true){
-				System.out.println("familyNameCheck :"+checkResult);
-				checkTextErrorMessage = "";
-
+		if(errorCheckTextNum == 0){
+			if ((checkText == null) || checkText.equals("")){
+				checkTextErrorMessage = "名前（姓）が未入力です。";
 			}else{
-				System.out.println("familyNameCheck :"+checkResult);
-
-//				項目ごと入力判定エラー時のエラー文章
-				if(regex == "^[ぁ-ん一-龠]*$"){
+				boolean checkResult = textError(regex, checkText);
+				if(checkResult == true){
+					checkTextErrorMessage = "";
+				}else{
 					checkTextErrorMessage = "ひらがな、漢字以外の入力があります。";
-				}else if(regex =="^[a-zA-Z0-9]*$"){
-					checkTextErrorMessage = "半角英数字以外の入力があります。";
-				}else if(regex =="^[a-zA-Z0-9.@-]*$"){
+				}
+			}
+			System.out.println("errorCheckTextNum : "+ errorCheckTextNum);
+			System.out.println("checkTextErrorMessage : "+ checkTextErrorMessage);
+
+			errorCheckTextNum += 1;
+		}else if(errorCheckTextNum == 1){
+			if((checkText == null) || checkText.equals("")){
+				checkTextErrorMessage = "名前（名）が未入力です。";
+			}else{
+				boolean checkResult = textError(regex, checkText);
+				if(checkResult == true){
+					checkTextErrorMessage = "";
+				}else{
+					checkTextErrorMessage = "ひらがな、漢字以外の入力があります。";
+				}
+			}
+			System.out.println("errorCheckTextNum : "+ errorCheckTextNum);
+			System.out.println("checkTextErrorMessage : "+ checkTextErrorMessage);
+
+			errorCheckTextNum += 1;
+		}else if(errorCheckTextNum == 2){
+			if ((checkText == null) || checkText.equals("")) {
+				checkTextErrorMessage = "カナ（姓）が未入力です。";
+			}else{
+				boolean checkResult = textError(regex, checkText);
+				if(checkResult == true){
+					checkTextErrorMessage = "";
+				}else{
+					checkTextErrorMessage = "カタカナ以外の入力があります。";
+				}
+			}
+			System.out.println("errorCheckTextNum : "+ errorCheckTextNum);
+			errorCheckTextNum += 1;
+		}else if(errorCheckTextNum == 3){
+			if ((checkText == null) || checkText.equals("")) {
+				checkTextErrorMessage = "カナ（名）が未入力です。";
+			}else{
+				boolean checkResult = textError(regex, checkText);
+				if(checkResult == true){
+					checkTextErrorMessage = "";
+				}else{
+					checkTextErrorMessage = "カタカナ以外の入力があります。";
+				}
+			}
+			System.out.println("errorCheckTextNum : "+ errorCheckTextNum);
+			errorCheckTextNum += 1;
+		}else if(errorCheckTextNum == 4){
+			if ((checkText == null) || checkText.equals("")) {
+				checkTextErrorMessage = "メールアドレスが未入力です。";
+			}else{
+				boolean checkResult = textError(regex, checkText);
+				if(checkResult == true){
+					checkTextErrorMessage = "";
+				}else{
 					checkTextErrorMessage = "半角英数字、「@-,」以外の入力があります。";
-				}else if(regex =="^[0-9]*$"){
+				}
+			}
+			System.out.println("errorCheckTextNum : "+ errorCheckTextNum);
+			errorCheckTextNum += 1;
+		}else if(errorCheckTextNum == 5){
+			if ((checkText == null) || checkText.equals("")){
+				checkTextErrorMessage = "パスワードが未入力です。";
+			}else{
+				boolean checkResult = textError(regex, checkText);
+				if(checkResult == true){
+					checkTextErrorMessage = "";
+				}else{
+					checkTextErrorMessage = "半角英数字以外の入力があります。";
+				}
+			}
+			System.out.println("errorCheckTextNum : "+ errorCheckTextNum);
+			errorCheckTextNum += 1;
+		}else if(errorCheckTextNum == 6){
+			if ((checkText == null) || checkText.equals("")) {
+				checkTextErrorMessage = "郵便番号が未入力です。";
+			}else{
+				boolean checkResult = textError(regex, checkText);
+				if(checkResult == true){
+					checkTextErrorMessage = "";
+				}else{
 					checkTextErrorMessage = "半角数字以外の入力があります。";
-				}else if(regex =="^[ぁ-ん一-龠ア-ン゛ﾟ0-9- 　]*$"){
+				}
+			}
+			System.out.println("errorCheckTextNum : "+ errorCheckTextNum);
+			errorCheckTextNum += 1;
+		}else if(errorCheckTextNum == 7){
+			if ((checkText == null) || checkText.equals("")) {
+				checkTextErrorMessage = "住所（市区町村）が未入力です。";
+			}else{
+				boolean checkResult = textError(regex, checkText);
+				if(checkResult == true){
+					checkTextErrorMessage = "";
+				}else{
 					checkTextErrorMessage = "ひらがな、漢字、カタカナ、半角数字以外の入力があります。";
 				}
 			}
-//		入力欄が空欄の場合
-		}else if((checkText == null) || (checkText.equals(""))){
-			checkTextErrorMessage = "入力必須項目です。";
+			System.out.println("errorCheckTextNum : "+ errorCheckTextNum);
+			errorCheckTextNum += 1;
+		}else if(errorCheckTextNum == 8){
+			if ((checkText == null) || checkText.equals("")) {
+				checkTextErrorMessage = "住所（番地）が未入力です。";
+			}else{
+				boolean checkResult = textError(regex, checkText);
+				if(checkResult == true){
+					checkTextErrorMessage = "";
+				}else{
+					checkTextErrorMessage = "ひらがな、漢字、カタカナ、半角数字以外の入力があります。";
+				}
+			}
+			System.out.println("errorCheckTextNum : "+ errorCheckTextNum);
+			errorCheckTextNum += 1;
 		}
+
 
 		return checkTextErrorMessage;
 	}
@@ -199,9 +295,6 @@ public class RegistConfirmAction extends ActionSupport implements SessionAware{
 	String regexMail = "^[a-zA-Z0-9.@-]*$";
 	String regexNum = "^[0-9]*$";
 	String regexAddress = "^[ぁ-ん一-龠ア-ン゛ﾟ0-9- 　]*$";
-
-
-
 //	--------------------------------------------
 
 	public boolean textError(String regex, String text){
@@ -275,6 +368,13 @@ public class RegistConfirmAction extends ActionSupport implements SessionAware{
 	public void setPassword(String password){
 		this.password = password;
 	}
+	public String getPasswordText(){
+		return passwordText;
+	}
+	public void setPasswordText(String passwordText){
+		this.passwordText = passwordText;
+	}
+
 	public int getGender(){
 		return gender;
 	}
@@ -392,7 +492,6 @@ public class RegistConfirmAction extends ActionSupport implements SessionAware{
 	public void setAddress2CodeErrorMessage(String address2ErrorMessage){
 		this.address2ErrorMessage = address2ErrorMessage;
 	}
-
 
 //	@Override
 	public void setSession(Map<String, Object> session){
