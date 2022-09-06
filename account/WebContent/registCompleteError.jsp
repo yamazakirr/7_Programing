@@ -7,7 +7,7 @@
 
 <link rel="stylesheet" type="text/css" href="./css/registCompleteError.css"/>
 
-<title>Insert title here</title>
+<title>ERROR画面</title>
 </head>
 <body>
 

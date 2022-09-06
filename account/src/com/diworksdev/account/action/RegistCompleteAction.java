@@ -39,17 +39,15 @@ public class RegistCompleteAction extends ActionSupport implements SessionAware{
 			String passwordHash = new String(hashPassword(session.get("password").toString()));
 			session.put("password",passwordHash);
 
-
-			String passwordHash1 = new String(hashPassword(session.get("password").toString()));
-
 			System.out.println();
 			System.out.println("password :"+ session.get("password"));
-			System.out.println("password :"+ passwordHash1);
 
 		}catch(NoSuchAlgorithmException e){
 			e.printStackTrace();
 		}
 //		=========================================
+
+		String result = ERROR;
 
 			registCompleteDAO.createUser(session.get("familyName").toString(),
 				session.get("lastName").toString(),
@@ -65,8 +63,7 @@ public class RegistCompleteAction extends ActionSupport implements SessionAware{
 				session.get("authority").toString()
 				);
 
-
-		String result = SUCCESS;
+		result = SUCCESS;
 		return result;
 
 	}

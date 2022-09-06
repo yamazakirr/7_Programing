@@ -18,6 +18,10 @@
 <body>
 
 <div id="header">
+	<p>ナビゲーションバー</p>
+</div>
+
+<div id="header">
 		<p><b>アカウント登録確認画面</b></p>
 	</div>
 
@@ -125,7 +129,7 @@
 
       </table>
 		<div class="button">
-			<s:submit value="戻る"/>
+			<button type="button" onclick=history.back()>戻る</button>
 			<s:submit class="b" value="登録する"/>
 		</div>
       </s:form>
