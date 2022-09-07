@@ -1,12 +1,25 @@
 @CHARSET "UTF-8";
 
+body{
+	margin:0 auto;
+}
+#navigation{
+	text-align:center;
+	border-bottom:1px solid black;
+}
+
+#header{
+	width:80%;
+	margin-left:10%;
+}
+
 #main{
 	width:80%;
 	margin:0 auto;
 }
 table{
   width:100%;
-  margin:0 auto;
+  margin-left:22%;
 }
 table td{
   padding-bottom:30px;
@@ -22,8 +35,8 @@ div .button{
 	text-align:center;
 }
 div .b{
-	width:150px;
-	height:100px;
+	width:200px;
+	height:70px;
 	text-align:center;
 }
 .button div{
@@ -32,4 +45,10 @@ div .b{
 }
 .errorMessage{
 	color:red;
+}
+#footer{
+	margin-top:20px;
+	text-align:center;
+	border-top:1px solid black;
+
 }

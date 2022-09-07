@@ -17,7 +17,7 @@
 </head>
 <body>
 
-<div id="header">
+<div id="navigation">
 	<p>ナビゲーションバー</p>
 </div>
 
@@ -136,8 +136,7 @@
     </div>
 
     <div id="footer">
-      <div id="pr">
-      </div>
+      	<p>フッター</p>
     </div>
 
 

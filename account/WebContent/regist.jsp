@@ -16,8 +16,11 @@
 <title>アカウント登録画面</title>
 </head>
 <body>
+	<div id="navigation">
+		<p>ナビゲーションバー</p>
+	</div>
 	<div id="header">
-		<p>アカウント登録画面</p>
+		<p><b>アカウント登録画面</b></p>
 	</div>
 
     <div id="main">
@@ -228,8 +231,7 @@
     </div>
 
     <div id="footer">
-      <div id="pr">
-      </div>
+      <p>フッター</p>
     </div>
 
 

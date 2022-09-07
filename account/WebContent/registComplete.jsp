@@ -6,20 +6,26 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<link rel="stylesheet" type="text/css" href="./css/registComplete.css"/>
+
 <title>アカウント登録画面</title>
 </head>
 <body>
+	<div id="navigation">
+		<p>ナビゲーションバー</p>
+	</div>
 
 	<div id="header">
-
+		<p><b>アカウント登録画面</b></p>
 	</div>
 	<div id="main">
 		<p><b>登録完了しました。</b></p>
 
-		<a href='<s:url action="HomeAction"/>'>TOPページへ戻る</a>
+		<button onclick='<s:url action="HomeAction"/>'>TOPページへ戻る</button>
 	</div>
 	<div id="footer">
-
+		<p>フッター</p>
 	</div>
 
 </body>
