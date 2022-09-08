@@ -13,14 +13,19 @@ public class RegistCompleteDAO {
 	private Connection connection = dbConnector.getConnection();
 	private DateUtil dateUtil = new DateUtil();
 
+
+
 	private String sql = "INSERT INTO login_user_transaction(family_name, last_name, family_name_kana, last_name_kana,"
 			+ " mail, password, gender, postal_code, prefecture, address_1, address_2, authority, registered_time)"
 			+ " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
-	public void createUser(String familyName, String lastName, String familyNameKana, String lastNameKana,
+	public String createUser(String familyName, String lastName, String familyNameKana, String lastNameKana,
 			String mail, String password, String gender, String postalCode, String prefecture, String address1,
 			String address2, String authorityNum) throws SQLException{
 
+		System.out.println("⑥");
+
+		String result = "";
 
 		try{
 
@@ -29,6 +34,7 @@ public class RegistCompleteDAO {
 		System.out.println("familyNameKana "+familyNameKana);
 		System.out.println("lastNameKana "+lastNameKana);
 		System.out.println("mail "+mail);
+
 
 
 		PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -48,13 +54,17 @@ public class RegistCompleteDAO {
 
 		preparedStatement.execute();
 
-
+		result = "success";
 
 		}catch(Exception e){
+			result = "error";
 			e.printStackTrace();
 		}finally{
 			connection.close();
+
+
 		}
+		return result;
 	}
 
 }

@@ -49,7 +49,7 @@ public class RegistCompleteAction extends ActionSupport implements SessionAware{
 
 		String result = ERROR;
 
-			registCompleteDAO.createUser(session.get("familyName").toString(),
+		result = registCompleteDAO.createUser(session.get("familyName").toString(),
 				session.get("lastName").toString(),
 				session.get("familyNameKana").toString(),
 				session.get("lastNameKana").toString(),
@@ -63,7 +63,6 @@ public class RegistCompleteAction extends ActionSupport implements SessionAware{
 				session.get("authority").toString()
 				);
 
-		result = SUCCESS;
 		return result;
 
 	}

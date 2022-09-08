@@ -99,7 +99,7 @@
             <label>パスワード</label>
           </td>
           <td>
-            <input type="text" class="text" name="password" maxlength="10" value="ssssss"/><br>
+            <input type="password" class="text" name="password" maxlength="10" value="ssssss"/><br>
             <div class="errorMessage">
 	            <s:if test="passwordErrorMessage != null">
 	            	<s:property value="passwordErrorMessage"/>

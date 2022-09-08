@@ -6,5 +6,4 @@ public class HomeAction extends ActionSupport{
 	public String execute(){
 		return SUCCESS;
 	}
-
 }
