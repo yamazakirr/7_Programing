@@ -133,6 +133,10 @@ public class RegistConfirmAction extends ActionSupport implements SessionAware{
 			System.out.println("errorCheckLists :"+errorCheckLists);
 //			--------------------------------------------
 
+//			■errorCheckListsとerrorCheckTextNumの項目数確認
+			System.out.println("errorCheckLists : "+errorCheckLists.size());
+			System.out.println("errorCheckTextNum : "+errorCheckTextNum);
+
 //			■全体のエラーチェック
 			int s = errorCheckAll();
 			if(s == 0){

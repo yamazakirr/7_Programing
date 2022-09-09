@@ -67,8 +67,6 @@ public class RegistCompleteAction extends ActionSupport implements SessionAware{
 
 	}
 
-
-
 //	■パスワードのハッシュ化するメソッド
 	public byte[] hashPassword(String password) throws NoSuchAlgorithmException{
 		MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
@@ -76,8 +74,6 @@ public class RegistCompleteAction extends ActionSupport implements SessionAware{
 		byte[] b = password.getBytes();
 		return messageDigest.digest(b);
 	}
-
-
 
 //	■getterとsetter
 	public int getId(){

@@ -19,6 +19,8 @@ public class DBConnector {
 			System.out.println("①");
 			Class.forName(driverName);
 			System.out.println("②");
+			System.out.println("getConnection(url,user,password) : "+(Connection)DriverManager.getConnection(url,user,password));
+
 			con = (Connection)DriverManager.getConnection(url,user,password);
 			System.out.println("con : "+con);
 			System.out.println("③");

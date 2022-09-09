@@ -23,7 +23,7 @@ public class RegistCompleteDAO {
 			String mail, String password, String gender, String postalCode, String prefecture, String address1,
 			String address2, String authorityNum) throws SQLException{
 
-		System.out.println("⑥");
+
 
 		String result = "";
 
@@ -35,9 +35,8 @@ public class RegistCompleteDAO {
 		System.out.println("lastNameKana "+lastNameKana);
 		System.out.println("mail "+mail);
 
-
-
 		PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
 		preparedStatement.setString(1, familyName);
 		preparedStatement.setString(2, lastName);
 		preparedStatement.setString(3, familyNameKana);
@@ -60,9 +59,10 @@ public class RegistCompleteDAO {
 			result = "error";
 			e.printStackTrace();
 		}finally{
-			connection.close();
 
-
+			if(connection != null){
+				connection.close();
+			}
 		}
 		return result;
 	}
