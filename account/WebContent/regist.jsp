@@ -123,8 +123,8 @@
           <td>
             <input type="text" class="text" name="postalCode" maxlength="7" value="12345"/><br>
             <div class="errorMessage">
-	            <s:if test="postalCodedErrorMessage != null">
-	            	<s:property value="postalCodedErrorMessage"/>
+	            <s:if test="postalCodeErrorMessage != null">
+	            	<s:property value="postalCodeErrorMessage"/>
 				</s:if>
             </div>
           </td>

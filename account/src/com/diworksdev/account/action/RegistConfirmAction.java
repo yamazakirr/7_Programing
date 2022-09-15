@@ -25,7 +25,7 @@ public class RegistConfirmAction extends ActionSupport implements SessionAware{
 
 	private int gender;
 	private String genderType;
-	private int postalCode;
+	private Integer postalCode;
 	private String prefecture;
 	private String address1;
 	private String address2;
@@ -62,6 +62,9 @@ public class RegistConfirmAction extends ActionSupport implements SessionAware{
 //	メソッド一覧
 	public String execute(){
 		String result = SUCCESS;
+
+		System.out.println("①postalCode :"+postalCode);
+
 
 
 //			■性別判定処理
@@ -159,6 +162,7 @@ public class RegistConfirmAction extends ActionSupport implements SessionAware{
 	int errorCheckTextNum = 0;
 
 	public String errorCheck(String regex,String checkText){
+		System.out.println("");
 		System.out.println("regex :"+regex);
 		System.out.println("checkText :"+checkText);
 		String checkTextErrorMessage = "";
@@ -179,7 +183,7 @@ public class RegistConfirmAction extends ActionSupport implements SessionAware{
 
 			errorCheckTextNum += 1;
 		}else if(errorCheckTextNum == 1){
-			if((checkText == null) || checkText.equals("")){
+			if(checkText.equals("")){
 				checkTextErrorMessage = "名前（名）が未入力です。";
 			}else{
 				boolean checkResult = textError(regex, checkText);
@@ -194,7 +198,7 @@ public class RegistConfirmAction extends ActionSupport implements SessionAware{
 
 			errorCheckTextNum += 1;
 		}else if(errorCheckTextNum == 2){
-			if ((checkText == null) || checkText.equals("")) {
+			if (checkText.equals("")) {
 				checkTextErrorMessage = "カナ（姓）が未入力です。";
 			}else{
 				boolean checkResult = textError(regex, checkText);
@@ -207,7 +211,7 @@ public class RegistConfirmAction extends ActionSupport implements SessionAware{
 			System.out.println("errorCheckTextNum : "+ errorCheckTextNum);
 			errorCheckTextNum += 1;
 		}else if(errorCheckTextNum == 3){
-			if ((checkText == null) || checkText.equals("")) {
+			if (checkText.equals("")) {
 				checkTextErrorMessage = "カナ（名）が未入力です。";
 			}else{
 				boolean checkResult = textError(regex, checkText);
@@ -220,20 +224,20 @@ public class RegistConfirmAction extends ActionSupport implements SessionAware{
 			System.out.println("errorCheckTextNum : "+ errorCheckTextNum);
 			errorCheckTextNum += 1;
 		}else if(errorCheckTextNum == 4){
-			if ((checkText == null) || checkText.equals("")) {
+			if (checkText.equals("")) {
 				checkTextErrorMessage = "メールアドレスが未入力です。";
 			}else{
 				boolean checkResult = textError(regex, checkText);
 				if(checkResult == true){
 					checkTextErrorMessage = "";
 				}else{
-					checkTextErrorMessage = "半角英数字、「@-,」以外の入力があります。";
+					checkTextErrorMessage = "半角英数字、「@-_.」以外の入力があります。";
 				}
 			}
 			System.out.println("errorCheckTextNum : "+ errorCheckTextNum);
 			errorCheckTextNum += 1;
 		}else if(errorCheckTextNum == 5){
-			if ((checkText == null) || checkText.equals("")){
+			if (checkText.equals("")){
 				checkTextErrorMessage = "パスワードが未入力です。";
 			}else{
 				boolean checkResult = textError(regex, checkText);
@@ -246,7 +250,7 @@ public class RegistConfirmAction extends ActionSupport implements SessionAware{
 			System.out.println("errorCheckTextNum : "+ errorCheckTextNum);
 			errorCheckTextNum += 1;
 		}else if(errorCheckTextNum == 6){
-			if ((checkText == null) || checkText.equals("")) {
+			if ((checkText.equals("null")) || checkText.equals("")) {
 				checkTextErrorMessage = "郵便番号が未入力です。";
 			}else{
 				boolean checkResult = textError(regex, checkText);
@@ -259,7 +263,7 @@ public class RegistConfirmAction extends ActionSupport implements SessionAware{
 			System.out.println("errorCheckTextNum : "+ errorCheckTextNum);
 			errorCheckTextNum += 1;
 		}else if(errorCheckTextNum == 7){
-			if ((checkText == null) || checkText.equals("")) {
+			if (checkText.equals("")) {
 				checkTextErrorMessage = "住所（市区町村）が未入力です。";
 			}else{
 				boolean checkResult = textError(regex, checkText);
@@ -272,7 +276,7 @@ public class RegistConfirmAction extends ActionSupport implements SessionAware{
 			System.out.println("errorCheckTextNum : "+ errorCheckTextNum);
 			errorCheckTextNum += 1;
 		}else if(errorCheckTextNum == 8){
-			if ((checkText == null) || checkText.equals("")) {
+			if (checkText.equals("")) {
 				checkTextErrorMessage = "住所（番地）が未入力です。";
 			}else{
 				boolean checkResult = textError(regex, checkText);
@@ -296,7 +300,7 @@ public class RegistConfirmAction extends ActionSupport implements SessionAware{
 //	以降に英数字、半角判定の変数を追加予定----------------------
 	String regexKana = "^[ア-ン゛゜]*$";
 	String regexNumAl = "^[a-zA-Z0-9]*$";
-	String regexMail = "^[a-zA-Z0-9.@-]*$";
+	String regexMail = "^[a-zA-Z0-9.@-_]*$";
 	String regexNum = "^[0-9]*$";
 	String regexAddress = "^[ぁ-ん一-龠ア-ン゛ﾟ0-9- 　]*$";
 //	--------------------------------------------
@@ -394,10 +398,12 @@ public class RegistConfirmAction extends ActionSupport implements SessionAware{
 	}
 
 
-	public int getPostalCode(){
+	public Integer getPostalCode(){
+		System.out.println("③postalCode :"+postalCode);
 		return postalCode;
 	}
-	public void setPostalCode(int postalCode){
+	public void setPostalCode(Integer postalCode){
+		System.out.println("②postalCode :"+postalCode);
 		this.postalCode = postalCode;
 	}
 	public String getPrefecture(){
@@ -479,6 +485,7 @@ public class RegistConfirmAction extends ActionSupport implements SessionAware{
 		this.mailErrorMessage = mailErrorMessage;
 	}
 	public String getPostalCodeErrorMessage(){
+		System.out.println("postalCodeErrorMessage :"+postalCodeErrorMessage);
 		return postalCodeErrorMessage;
 	}
 	public void setPostalCodeErrorMessage(String postalCodeErrorMessage){

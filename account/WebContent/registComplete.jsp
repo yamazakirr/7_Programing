@@ -22,7 +22,9 @@
 	<div id="main">
 		<p><b>登録完了しました。</b></p>
 
-		<button onclick='<s:url action="HomeAction"/>'>TOPページへ戻る</button>
+		<s:form action="HomeAction">
+			<s:submit value="TOPページへ戻る"/>
+		</s:form>
 	</div>
 	<div id="footer">
 		<p>フッター</p>
