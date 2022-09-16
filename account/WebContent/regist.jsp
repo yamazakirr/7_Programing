@@ -86,7 +86,7 @@
             <label>メールアドレス</label>
           </td>
           <td>
-            <input type="text" class="text" name="mail" maxlength="100" value="test@gmail.com"/><br>
+            <input type="text" class="text" name="mail" maxlength="100" value="test@gmail.com-_"/><br>
             <div class="errorMessage">
 	            <s:if test="mailErrorMessage != null">
 	            	<s:property value="mailErrorMessage"/>

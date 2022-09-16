@@ -30,6 +30,7 @@
 			<li>問い合わせ</li>
 			<li>その他</li>
 			<li><a href='<s:url action="RegistAction"/>'>アカウント登録</a></li>
+			<li><a href='<s:url action="ListAction"/>'>アカウント一覧</a></li>
 		</ul>
 	</div>
 	<div id="main">

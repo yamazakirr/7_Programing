@@ -25,12 +25,15 @@ public class RegistConfirmAction extends ActionSupport implements SessionAware{
 
 	private int gender;
 	private String genderType;
-	private Integer postalCode;
+
+	private String postalCode;
+
 	private String prefecture;
 	private String address1;
 	private String address2;
 	private int authority;
 	private String authorityText;
+
 
 	private String errorMessage;
 
@@ -63,7 +66,7 @@ public class RegistConfirmAction extends ActionSupport implements SessionAware{
 	public String execute(){
 		String result = SUCCESS;
 
-		System.out.println("①postalCode :"+postalCode);
+
 
 
 
@@ -125,7 +128,7 @@ public class RegistConfirmAction extends ActionSupport implements SessionAware{
 			this.passwordErrorMessage = errorCheck(regexNumAl, password);
 			errorCheckLists.add(this.passwordErrorMessage);
 
-			this.postalCodeErrorMessage = errorCheck(regexNum, String.valueOf(postalCode));
+			this.postalCodeErrorMessage = errorCheck(regexNum, postalCode);
 			errorCheckLists.add(this.postalCodeErrorMessage);
 
 			this.address1ErrorMessage = errorCheck(regexAddress, address1);
@@ -253,11 +256,16 @@ public class RegistConfirmAction extends ActionSupport implements SessionAware{
 			if ((checkText.equals("null")) || checkText.equals("")) {
 				checkTextErrorMessage = "郵便番号が未入力です。";
 			}else{
-				boolean checkResult = textError(regex, checkText);
-				if(checkResult == true){
-					checkTextErrorMessage = "";
+
+				if(checkText.length() < 7){
+					checkTextErrorMessage = "半角数字7桁で入力をお願いします。";
 				}else{
-					checkTextErrorMessage = "半角数字以外の入力があります。";
+					boolean checkResult = textError(regex, checkText);
+					if(checkResult == true){
+						checkTextErrorMessage = "";
+					}else{
+						checkTextErrorMessage = "半角数字以外の入力があります。";
+					}
 				}
 			}
 			System.out.println("errorCheckTextNum : "+ errorCheckTextNum);
@@ -300,7 +308,7 @@ public class RegistConfirmAction extends ActionSupport implements SessionAware{
 //	以降に英数字、半角判定の変数を追加予定----------------------
 	String regexKana = "^[ア-ン゛゜]*$";
 	String regexNumAl = "^[a-zA-Z0-9]*$";
-	String regexMail = "^[a-zA-Z0-9.@-_]*$";
+	String regexMail = "^[a-zA-Z0-9.@_-]*$";
 	String regexNum = "^[0-9]*$";
 	String regexAddress = "^[ぁ-ん一-龠ア-ン゛ﾟ0-9- 　]*$";
 //	--------------------------------------------
@@ -398,12 +406,11 @@ public class RegistConfirmAction extends ActionSupport implements SessionAware{
 	}
 
 
-	public Integer getPostalCode(){
-		System.out.println("③postalCode :"+postalCode);
+
+	public String getPostalCode(){
 		return postalCode;
 	}
-	public void setPostalCode(Integer postalCode){
-		System.out.println("②postalCode :"+postalCode);
+	public void setPostalCode(String postalCode){
 		this.postalCode = postalCode;
 	}
 	public String getPrefecture(){

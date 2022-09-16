@@ -31,6 +31,12 @@
 	</action>
 
 
+<!-- ListAction -->
+	<action name="ListAction" class="com.diworksdev.account.action.ListAction" method="execute">
+	<result name="success">list.jsp</result>
+	</action>
+
+
 
 
 
