@@ -25,6 +25,7 @@ public class ListDAO {
 		try{
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
+
 			ResultSet resultSet = preparedStatement.executeQuery();
 
 			while(resultSet.next()){
@@ -42,6 +43,10 @@ public class ListDAO {
 				dto.setUpdateTime(resultSet.getString("update_time"));
 
 				listDTO.add(dto);
+
+				System.out.println("id  :"+resultSet.getString("id"));
+				System.out.println("family_name  :"+resultSet.getString("family_name"));
+				System.out.println("listDTO : "+ listDTO);
 
 			}
 		}catch(Exception e){

@@ -12,12 +12,16 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class ListAction extends ActionSupport implements SessionAware{
 
+//	■インスタンス化、フィールドの宣言
 	public Map<String, Object> session;
-	private ListDAO listDAO = new ListDAO();
-	private ArrayList<ListDTO> list = new ArrayList<ListDTO>();
+	ListDAO listDAO = new ListDAO();
+	private ArrayList<ListDTO> accountList = new ArrayList<ListDTO>();
 
 
 	public String execute() throws SQLException{
+
+		accountList = listDAO.getListUserInfo();
+
 		return SUCCESS;
 	}
 
@@ -25,8 +29,8 @@ public class ListAction extends ActionSupport implements SessionAware{
 	public void setSession(Map<String, Object> session){
 		this.session = session;
 	}
-	public ArrayList<ListDTO> getList(){
-		return this.list;
+	public ArrayList<ListDTO> getAccountList(){
+		return this.accountList;
 	}
 
 
