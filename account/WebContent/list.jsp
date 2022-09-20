@@ -41,7 +41,7 @@
     			<th>削除フラグ</th>
     			<th>登録日時</th>
     			<th>更新日時</th>
-    			<th>操作</th>
+    			<th colspan="2">操作</th>
     		</tr>
 
     		<s:iterator value="accountList">
@@ -57,10 +57,9 @@
     				<td><s:property value="deleteFlg"/></td>
     				<td><s:property value="registeredTime"/></td>
     				<td><s:property value="updateTime"/></td>
-
+    				<td><a href='<s:url action="DeleteAction"/>'>削除</a></td>
+    				<td><a href='<s:url action="UpdateAction"/>'>更新</a></td>
     			</tr>
-
-
     		</s:iterator>
     		</table>
 

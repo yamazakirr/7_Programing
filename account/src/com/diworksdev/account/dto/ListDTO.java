@@ -1,5 +1,10 @@
 package com.diworksdev.account.dto;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+
 public class ListDTO {
 	public String id;
 	public String familyName;
@@ -13,9 +18,14 @@ public class ListDTO {
 	public String registeredTime;
 	public String updateTime;
 
+//	■日付のフォーマット変換
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+
+
 
 	public String getId(){
 		return id;
+
 	}
 	public void setId(String id){
 		this.id = id;
@@ -84,14 +94,25 @@ public class ListDTO {
 		return registeredTime;
 	}
 	public void setRegisteredTime(String registeredTime){
-
-		this.registeredTime = registeredTime;
+		try{
+			Date date = sdf.parse(registeredTime);
+			String str = new SimpleDateFormat("yyyy/MM/dd").format(date);
+			this.registeredTime = str;
+		}catch(ParseException e){
+			e.printStackTrace();
+		}
 	}
 	public String getUpdateTime(){
 		return updateTime;
 	}
 	public void setUpdateTime(String updateTime){
-		this.updateTime = updateTime;
+		try{
+			Date date = sdf.parse(updateTime);
+			String str = new SimpleDateFormat("yyyy/MM/dd").format(date);
+			this.updateTime = str;
+		}catch(ParseException e){
+			e.printStackTrace();
+		}
 	}
 
 
