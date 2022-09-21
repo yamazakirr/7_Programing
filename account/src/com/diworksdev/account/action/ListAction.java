@@ -22,7 +22,11 @@ public class ListAction extends ActionSupport implements SessionAware{
 
 		accountList = listDAO.getListUserInfo();
 
-		return SUCCESS;
+		if(accountList == null){
+			return ERROR;
+		}else{
+			return SUCCESS;
+		}
 	}
 
 // @Override

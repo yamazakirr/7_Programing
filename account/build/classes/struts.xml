@@ -34,6 +34,7 @@
 <!-- ListAction -->
 	<action name="ListAction" class="com.diworksdev.account.action.ListAction" method="execute">
 	<result name="success">list.jsp</result>
+	<result name="error">listError.jsp</result>
 	</action>
 
 

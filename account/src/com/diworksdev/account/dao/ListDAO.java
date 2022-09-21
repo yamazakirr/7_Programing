@@ -52,9 +52,13 @@ public class ListDAO {
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
-			connection.close();
+			if(connection != null){
+				connection.close();
+			}else if(connection == null){
+				listDTO = null;
+				return listDTO;
+			}
 		}
-
 		return listDTO;
 
 	}

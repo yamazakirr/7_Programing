@@ -27,7 +27,6 @@
     		<h3>登録情報はありません。</h3>
     	</s:if>
     	<s:elseif test="accountList != null">
-    		<h3>登録情報は以下となります。</h3>
     		<table border="1">
     		<tr>
     			<th>ID</th>
@@ -57,8 +56,17 @@
     				<td><s:property value="deleteFlg"/></td>
     				<td><s:property value="registeredTime"/></td>
     				<td><s:property value="updateTime"/></td>
-    				<td><a href='<s:url action="DeleteAction"/>'>削除</a></td>
-    				<td><a href='<s:url action="UpdateAction"/>'>更新</a></td>
+    				<td>
+    					<s:form action="DeleteAction">
+    						<s:submit value="削除"/>
+    					</s:form>
+    				</td>
+
+    				<td>
+    					<s:form action="UpdateAction">
+    						<s:submit value="更新"/>
+    					</s:form>
+    				</td>
     			</tr>
     		</s:iterator>
     		</table>

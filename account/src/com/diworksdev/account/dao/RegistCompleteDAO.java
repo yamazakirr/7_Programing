@@ -3,17 +3,25 @@ package com.diworksdev.account.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import com.diworksdev.account.util.DBConnector;
-import com.diworksdev.account.util.DateUtil;
 
 public class RegistCompleteDAO {
 
 	private DBConnector dbConnector = new DBConnector();
 	private Connection connection = dbConnector.getConnection();
-	private DateUtil dateUtil = new DateUtil();
+	private String nowString;
 
 
+//	■コンストラクタ
+	public RegistCompleteDAO(){
+//		■現在時刻の取得
+		Date date = new Date();
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		this.nowString = simpleDateFormat.format(date);
+	}
 
 	private String sql = "INSERT INTO login_user_transaction(family_name, last_name, family_name_kana, last_name_kana,"
 			+ " mail, password, gender, postal_code, prefecture, address_1, address_2, authority, delete_flg, registered_time, update_time)"
@@ -54,8 +62,8 @@ public class RegistCompleteDAO {
 		preparedStatement.setString(11, address2);
 		preparedStatement.setString(12, authorityNum);
 		preparedStatement.setString(13, deleteFlg);
-		preparedStatement.setString(14, dateUtil.getDate());
-		preparedStatement.setString(15, dateUtil.getDate());
+		preparedStatement.setString(14, nowString);
+		preparedStatement.setString(15, nowString);
 
 		preparedStatement.execute();
 
