@@ -341,7 +341,7 @@ public class RegistConfirmAction extends ActionSupport implements SessionAware{
 	}
 
 
-//	getterとsetter
+//	■getterとsetter
 	public int getId(){
 		return id;
 	}
