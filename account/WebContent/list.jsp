@@ -59,7 +59,7 @@
     				<td>
     					<s:form action="DeleteAction">
     						<s:submit value="削除"/>
-    						<input type="hidden" <s:property value="id"/> >
+							<input type="hidden" value='<s:property value="id"/>' name="id">
     					</s:form>
     				</td>
 

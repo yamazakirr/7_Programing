@@ -16,6 +16,9 @@ public class DeleteDAO {
 	private Connection connection = dbConnector.getConnection();
 
 	public ArrayList<DeleteDTO> getListDeleteUserInfo(String deleteId) throws SQLException{
+		System.out.println("deleteId : " + deleteId);
+
+
 		ArrayList<DeleteDTO> deleteDTO = new ArrayList<DeleteDTO>();
 
 		String sql = "SELECT id, family_name, last_name, family_name_kana, last_name_kana, mail, password, gender, postal_code,"
@@ -36,6 +39,7 @@ public class DeleteDAO {
 				dto.setFamilyNameKana(resultSet.getString("family_name_kana"));
 				dto.setLastNameKana(resultSet.getString("last_name_kana"));
 				dto.setMail(resultSet.getString("mail"));
+				dto.setPassword(resultSet.getString("password"));
 				dto.setGender(resultSet.getString("gender"));
 				dto.setPostalCode(resultSet.getString("postal_code"));
 				dto.setPrefecture(resultSet.getString("prefecture"));

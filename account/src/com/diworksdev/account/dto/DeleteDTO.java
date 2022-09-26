@@ -12,7 +12,6 @@ public class DeleteDTO {
 	private String passwordText;
 
 	private String gender;
-	private String genderType;
 
 	private String postalCode;
 
@@ -20,9 +19,6 @@ public class DeleteDTO {
 	private String address1;
 	private String address2;
 	private String authority;
-	private String authorityText;
-
-
 
 
 //	■getterとsetter
@@ -30,6 +26,7 @@ public class DeleteDTO {
 		return id;
 	}
 	public void setId(String id){
+		System.out.println("id : "+id);
 		this.id = id;
 	}
 	public String getFamilyName(){
@@ -63,9 +60,11 @@ public class DeleteDTO {
 		this.mail = mail;
 	}
 	public String getPassword(){
+		System.out.println("getの password : "+password);
 		return password;
 	}
 	public void setPassword(String password){
+		System.out.println("setの password : "+password);
 		this.password = password;
 	}
 	public String getPasswordText(){
@@ -79,16 +78,12 @@ public class DeleteDTO {
 		return gender;
 	}
 	public void setGender(String gender){
-		this.gender = gender;
+		if(gender.equals("0")){
+			this.gender = "男性";
+		}else if(gender.equals("1")){
+			this.gender = "女性";
+		}
 	}
-	public String getGenderType(){
-		return genderType;
-	}
-	public void setGenderType(String genderType){
-		this.genderType = genderType;
-	}
-
-
 
 	public String getPostalCode(){
 		return postalCode;
@@ -118,12 +113,10 @@ public class DeleteDTO {
 		return authority;
 	}
 	public void setAuthority(String authority){
-		this.authority = authority;
-	}
-	public String getAuthorityText(){
-		return authorityText;
-	}
-	public void setAuthorityNum(String authorityText){
-		this.authorityText = authorityText;
+		if(authority.equals("0")){
+			this.authority = "一般";
+		}else if(authority.equals("1")){
+			this.authority = "管理者";
+		}
 	}
 }

@@ -18,6 +18,9 @@ public class DeleteAction extends ActionSupport {
 	public String execute() throws SQLException{
 		deleteList = deleteDAO.getListDeleteUserInfo(id);
 
+		System.out.println("deleteList : "+deleteList);
+		System.out.println("id : "+id);
+
 		if(deleteList == null){
 			return ERROR;
 		}else{
@@ -32,8 +35,11 @@ public class DeleteAction extends ActionSupport {
 		return id;
 	}
 	public void setId(String id){
-		System.out.println("DeleteActionのid : "+id);
 		this.id = id;
+	}
+
+	public ArrayList<DeleteDTO> getDeleteList(){
+		return this.deleteList;
 	}
 
 }
