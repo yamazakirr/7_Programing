@@ -25,6 +25,7 @@
 
 		<s:form action="DeleteCompleteAction">
 			<s:submit value="削除する"/>
+			<input type="hidden" value="<s:property value='id'/>" name="id">
 		</s:form>
     </div>
 

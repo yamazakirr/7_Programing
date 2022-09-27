@@ -120,6 +120,7 @@
 	<div id="botton">
 		<s:form action="DeleteConfirmAction">
 			<s:submit value="確認する"/>
+			<input type="hidden" value="<s:property value='id'/>" name="id">
 		</s:form>
 	</div>
 
