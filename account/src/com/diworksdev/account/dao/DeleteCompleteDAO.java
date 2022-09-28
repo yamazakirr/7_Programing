@@ -24,6 +24,13 @@ public class DeleteCompleteDAO {
 
 			int res = preparedStatement.executeUpdate();
 
+//			■削除判定処理
+			if(res == 0){
+				return result;
+			}else{
+				;
+			}
+
 			System.out.println("res : "+res);
 
 		}catch(Exception e){

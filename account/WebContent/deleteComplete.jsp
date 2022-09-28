@@ -19,9 +19,6 @@
     <div id="main">
 	    <h1>削除完了しました</h1>
 
-	<s:property value="id"/>
-
-
 
     </div>
 

@@ -66,6 +66,7 @@
     				<td>
     					<s:form action="UpdateAction">
     						<s:submit value="更新"/>
+    						<input type="hidden" value='<s:property value="id"/>' name="id">
     					</s:form>
     				</td>
     			</tr>

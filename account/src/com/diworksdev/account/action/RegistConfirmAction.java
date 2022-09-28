@@ -445,7 +445,7 @@ public class RegistConfirmAction extends ActionSupport implements SessionAware{
 	}
 
 
-//	エラーメッセージのgetter,setter
+//	■エラーメッセージのgetter,setter
 
 	public String getErrorMessage(){
 		return errorMessage;
