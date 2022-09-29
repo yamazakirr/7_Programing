@@ -20,6 +20,8 @@
 
     <div id="main">
 
+	<s:form action="UpdateConfirmAction">
+
     <s:iterator value="updateList">
 	<table>
 
@@ -183,6 +185,7 @@
               <option value="鹿児島県">鹿児島県</option>
               <option value="沖縄県">沖縄県</option>
             </select>
+            ※都道府県の初期値の設定は一旦飛ばす
           </td>
         </tr>
         <tr>
@@ -234,10 +237,15 @@
 
       </table>
 
-
-
-
+		<div class="button">
+			<s:submit class="b" value="確認する"/>
+		</div>
     </s:iterator>
+    </s:form>
+    </div>
+
+    <div id="footer">
+      <p>フッター</p>
     </div>
 
 </body>
