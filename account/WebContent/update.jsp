@@ -6,6 +6,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<link rel="stylesheet" type="text/css" href="./css/update.css"/>
+
 <title>更新画面</title>
 </head>
 <body>
@@ -239,6 +242,7 @@
 
 		<div class="button">
 			<s:submit class="b" value="確認する"/>
+			<input type="hidden" name="id" value="<s:property value='id'/>">
 		</div>
     </s:iterator>
     </s:form>

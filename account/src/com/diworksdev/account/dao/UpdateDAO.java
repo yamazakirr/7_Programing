@@ -12,7 +12,6 @@ import com.diworksdev.account.util.DBConnector;
 public class UpdateDAO {
 
 
-
 	private DBConnector dbConnector = new DBConnector();
 	private Connection connection = dbConnector.getConnection();
 	private String sql="SELECT id, family_name, last_name, family_name_kana, last_name_kana, mail, password,"

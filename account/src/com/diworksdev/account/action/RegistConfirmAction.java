@@ -304,13 +304,13 @@ public class RegistConfirmAction extends ActionSupport implements SessionAware{
 
 
 //	■入力エラー判定処理
-	String regexHiraKan = "^[ぁ-ん一-龠]*$";
+	public String regexHiraKan = "^[ぁ-ん一-龠]*$";
 //	以降に英数字、半角判定の変数を追加予定----------------------
-	String regexKana = "^[ア-ン゛゜]*$";
-	String regexNumAl = "^[a-zA-Z0-9]*$";
-	String regexMail = "^[a-zA-Z0-9.@_-]*$";
-	String regexNum = "^[0-9]*$";
-	String regexAddress = "^[ぁ-ん一-龠ア-ン゛ﾟ0-9- 　]*$";
+	public String regexKana = "^[ア-ン゛゜]*$";
+	public String regexNumAl = "^[a-zA-Z0-9]*$";
+	public String regexMail = "^[a-zA-Z0-9.@_-]*$";
+	public String regexNum = "^[0-9]*$";
+	public String regexAddress = "^[ぁ-ん一-龠ア-ン゛ﾟ0-9- 　]*$";
 //	--------------------------------------------
 
 	public boolean textError(String regex, String text){

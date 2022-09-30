@@ -6,9 +6,11 @@ import java.util.ArrayList;
 import com.diworksdev.account.dao.UpdateDAO;
 import com.diworksdev.account.dto.UpdateDTO;
 import com.opensymphony.xwork2.ActionSupport;
+
 public class UpdateAction extends ActionSupport{
 
 	private String id;
+
 	private ArrayList<UpdateDTO> updateList = new ArrayList<UpdateDTO>();
 	private UpdateDAO updateDAO = new UpdateDAO();
 
@@ -16,11 +18,11 @@ public class UpdateAction extends ActionSupport{
 		String result = ERROR;
 
 		try{
+//			■アカウント情報出力処理
 			updateList = updateDAO.getUserInfo(id);
 
 			System.out.println("updateList : "+ updateList);
 			System.out.println("id : "+id);
-
 
 //			■エラー処理判定
 			if(updateList == null){
@@ -33,7 +35,7 @@ public class UpdateAction extends ActionSupport{
 			e.printStackTrace();
 		}
 
-
+		System.out.println("result : "+result);
 		result = SUCCESS;
 		return result;
 	}

@@ -2,7 +2,6 @@ package com.diworksdev.account.dto;
 
 public class UpdateDTO {
 
-
 	private String id;
 	private String familyName;
 	private String lastName;
