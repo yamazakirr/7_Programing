@@ -2,6 +2,7 @@ package com.diworksdev.account.action;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Map;
 
 import com.diworksdev.account.dao.UpdateDAO;
 import com.diworksdev.account.dto.UpdateDTO;
@@ -10,8 +11,9 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class UpdateConfirmAction extends ActionSupport{
 
-	private ArrayList<UpdateDTO> updateList = new ArrayList<UpdateDTO>();
-	private UpdateDAO updateDAO = new UpdateDAO();
+
+
+	public Map<String, Object> session;
 
 	private String id;
 	private String familyName;
@@ -28,7 +30,6 @@ public class UpdateConfirmAction extends ActionSupport{
 	private String address2;
 	private String authority;
 
-//	private String errorMessage;
 
 //エラー用のフィールド
 //	「ひらがな、漢字」のみ
@@ -48,6 +49,8 @@ public class UpdateConfirmAction extends ActionSupport{
 	private String address2ErrorMessage;
 //	--------------------------------------------
 
+	private ArrayList<UpdateDTO> updateList = new ArrayList<UpdateDTO>();
+	private UpdateDAO updateDAO = new UpdateDAO();
 	private RegistConfirmAction rca = new RegistConfirmAction();
 
 	public String execute(){
@@ -58,6 +61,23 @@ public class UpdateConfirmAction extends ActionSupport{
 		for(int i=0; i < passwordNum; i++){
 			this.passwordText += "●";
 		}
+
+
+//		■Mapに値を格納
+//		session.put("familyName", familyName);
+//		session.put("lastName", lastName);
+//		session.put("familyNameKana", familyNameKana);
+//		session.put("lastNameKana", lastNameKana);
+//		session.put("mail", mail);
+//		session.put("password", password);
+//		session.put("gender", gender);
+//		session.put("postalCode", postalCode);
+//		session.put("prefecture", prefecture);
+//		session.put("address1", address1);
+//		session.put("address2", address2);
+//		session.put("authority", authority);
+//		session.put("authority", authority);
+
 
 //		■入力値エラー判定処理
 		System.out.println("rca.regexHiraKan : "+rca.regexHiraKan);
@@ -162,7 +182,11 @@ public class UpdateConfirmAction extends ActionSupport{
 		return gender;
 	}
 	public void setGender(String gender){
-		this.gender = gender;
+		if(gender.equals("0")){
+			this.gender = "男性";
+		}else if(gender.equals("1")){
+			this.gender = "女性";
+		}
 	}
 	public String getPostalCode(){
 		return postalCode;
@@ -192,7 +216,11 @@ public class UpdateConfirmAction extends ActionSupport{
 		return authority;
 	}
 	public void setAuthority(String authority){
-		this.authority = authority;
+		if(authority.equals("0")){
+			this.authority = "一般";
+		}else if(authority.equals("1")){
+			this.authority = "管理者";
+		}
 	}
 
 
@@ -258,5 +286,6 @@ public class UpdateConfirmAction extends ActionSupport{
 	public ArrayList<UpdateDTO> getUpdateList(){
 		return this.updateList;
 	}
+
 
 }

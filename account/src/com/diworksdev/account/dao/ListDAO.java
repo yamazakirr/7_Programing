@@ -28,6 +28,9 @@ public class ListDAO {
 
 			ResultSet resultSet = preparedStatement.executeQuery();
 
+			System.out.println("DAO ①");
+			System.out.println("DAO ①");
+
 			while(resultSet.next()){
 				ListDTO dto = new ListDTO();
 				dto.setId(resultSet.getString("id"));

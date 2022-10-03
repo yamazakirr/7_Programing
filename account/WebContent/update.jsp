@@ -107,6 +107,17 @@
           </td>
         </tr>
         <tr>
+        	<td>
+        		<label>パスワードの変更の有無</label>
+        	</td>
+        	<td>
+        		<input type="radio" name="passwordSelect" value="0" checked="checked">変更する
+        		<input type="radio" name="passwordSelect" value="1" checked="checked">変更しない
+        	</td>
+        </tr>
+
+
+        <tr>
           <td>
             <label>性別</label>
           </td>
@@ -139,7 +150,7 @@
             <label>住所（都道府県）</label>
           </td>
           <td>
-            <select name="prefecture">
+            <select name="prefecture" id="prefecture">
               <option value="北海道" selected>北海道</option>
               <option value="青森県">青森県</option>
               <option value="岩手県">岩手県</option>
@@ -237,6 +248,7 @@
 
           </td>
         </tr>
+
 
       </table>
 

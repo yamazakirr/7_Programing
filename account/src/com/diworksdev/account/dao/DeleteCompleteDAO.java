@@ -11,8 +11,6 @@ public class DeleteCompleteDAO {
 	private DBConnector dbConnector = new DBConnector();
 	private Connection connection = dbConnector.getConnection();
 
-
-
 	public String deleteInfo(String id)throws SQLException{
 		String result = "error";
 		String sql ="UPDATE login_user_transaction SET delete_flg = 1 "
