@@ -23,6 +23,7 @@ public class UpdateConfirmAction extends ActionSupport{
 	private String mail;
 	private String password;
 	private String passwordText = "";
+	private String passwordChange;
 	private String gender;
 	private String postalCode;
 	private String prefecture;
@@ -56,29 +57,6 @@ public class UpdateConfirmAction extends ActionSupport{
 	public String execute(){
 		String result = ERROR;
 
-//		■パスワード黒まる表示用の処理
-		int passwordNum = password.length();
-		for(int i=0; i < passwordNum; i++){
-			this.passwordText += "●";
-		}
-
-
-//		■Mapに値を格納
-//		session.put("familyName", familyName);
-//		session.put("lastName", lastName);
-//		session.put("familyNameKana", familyNameKana);
-//		session.put("lastNameKana", lastNameKana);
-//		session.put("mail", mail);
-//		session.put("password", password);
-//		session.put("gender", gender);
-//		session.put("postalCode", postalCode);
-//		session.put("prefecture", prefecture);
-//		session.put("address1", address1);
-//		session.put("address2", address2);
-//		session.put("authority", authority);
-//		session.put("authority", authority);
-
-
 //		■入力値エラー判定処理
 		System.out.println("rca.regexHiraKan : "+rca.regexHiraKan);
 
@@ -92,8 +70,24 @@ public class UpdateConfirmAction extends ActionSupport{
 		rca.errorCheckLists.add(this.lastNameKanaErrorMessage);
 		this.mailErrorMessage = rca.errorCheck(rca.regexMail, mail);
 		rca.errorCheckLists.add(this.mailErrorMessage);
-		this.passwordErrorMessage = rca.errorCheck(rca.regexNumAl, password);
-		rca.errorCheckLists.add(this.passwordErrorMessage);
+
+		if(passwordChange.equals("1")){
+//			■パスワード変更する
+			this.passwordErrorMessage = rca.errorCheck(rca.regexNumAl, password);
+			rca.errorCheckLists.add(this.passwordErrorMessage);
+
+//			■パスワード黒まる表示用の処理
+			int passwordNum = password.length();
+			for(int i=0; i < passwordNum; i++){
+				this.passwordText += "●";
+			}
+		}else if(passwordChange.equals("0")){
+//			■パスワード変更しない
+//			エラーが出ない状態でerrorCheckメソッドを呼び出す
+			this.passwordErrorMessage = rca.errorCheck(rca.regexNumAl, "ture");
+			this.passwordText = null;
+		}
+
 		this.postalCodeErrorMessage = rca.errorCheck(rca.regexNum, postalCode);
 		rca.errorCheckLists.add(this.postalCodeErrorMessage);
 		this.address1ErrorMessage = rca.errorCheck(rca.regexAddress, address1);
@@ -177,6 +171,12 @@ public class UpdateConfirmAction extends ActionSupport{
 	}
 	public void setPasswordText(String passwordText){
 		this.passwordText = passwordText;
+	}
+	public String getPasswordChange(){
+		return passwordChange;
+	}
+	public void setPasswordChange(String passwordChange){
+		this.passwordChange = passwordChange;
 	}
 	public String getGender(){
 		return gender;

@@ -10,6 +10,8 @@ import com.opensymphony.xwork2.ActionSupport;
 public class UpdateAction extends ActionSupport{
 
 	private String id;
+	private String prefecture;
+
 
 	private ArrayList<UpdateDTO> updateList = new ArrayList<UpdateDTO>();
 	private UpdateDAO updateDAO = new UpdateDAO();
@@ -46,6 +48,12 @@ public class UpdateAction extends ActionSupport{
 	}
 	public void setId(String id){
 		this.id = id;
+	}
+	public String getPrefecture(){
+		return prefecture;
+	}
+	public void setPrefecture(String prefecture){
+		this.prefecture = prefecture;
 	}
 	public ArrayList<UpdateDTO> getUpdateList(){
 		return this.updateList;

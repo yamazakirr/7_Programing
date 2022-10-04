@@ -63,14 +63,16 @@
 				<s:property value="mail"/>
           </td>
         </tr>
-        <tr>
-          <td>
-            <label>パスワード</label>
-          </td>
-          <td>
-				<s:property value="passwordText"/>
-          </td>
-        </tr>
+        <s:if test="passwordText != null">
+	        <tr>
+	          <td>
+	            <label>パスワード</label>
+	          </td>
+	          <td>
+					<s:property value="passwordText"/>
+	          </td>
+	        </tr>
+        </s:if>
         <tr>
           <td>
             <label>性別</label>
@@ -133,6 +135,7 @@
 			<input type="hidden" name="lastNameKana" value="<s:property value='lastNameKana'/>">
 			<input type="hidden" name="mail" value="<s:property value='mail'/>">
 			<input type="hidden" name="password" value="<s:property value='password'/>">
+			<input type="hidden" name="passwordChange" value="<s:property value='passwordChange'/>">
 			<input type="hidden" name="gender" value="<s:property value='gender'/>">
 			<input type="hidden" name="postalCode" value="<s:property value='postalCode'/>">
 			<input type="hidden" name="prefecture" value="<s:property value='prefecture'/>">

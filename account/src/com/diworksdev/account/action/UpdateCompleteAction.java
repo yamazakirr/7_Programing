@@ -20,6 +20,7 @@ public class UpdateCompleteAction extends ActionSupport{
 	private String mail;
 	private String password;
 	private String passwordText = "";
+	private String passwordChange;
 	private String gender;
 	private String postalCode;
 	private String prefecture;
@@ -35,20 +36,29 @@ public class UpdateCompleteAction extends ActionSupport{
 		String result = ERROR;
 
 
+		if(passwordChange.equals("1")){
+			try{
+				//			■パスワードのハッシュ化処理
+				String passwordHash = new String(hashPassword(this.password));
+				this.password = passwordHash;
 
-		try{
-//			■パスワードのハッシュ化処理
-			String passwordHash = new String(hashPassword(this.password));
-			this.password = passwordHash;
+				//			■データベースの更新処理
+				result = dao.updateInfo(id, familyName, lastName, familyNameKana, lastNameKana, mail, password, gender, postalCode, prefecture, address1, address2, authority);
 
-//			■データベースの更新処理
-			result = dao.updateInfo(id, familyName, lastName, familyNameKana, lastNameKana, mail, password, gender, postalCode, prefecture, address1, address2, authority);
+			}catch(SQLException e){
+				e.printStackTrace();
+			}catch(NoSuchAlgorithmException e){
+				e.printStackTrace();
+			}
+		}else if(passwordChange.equals("0")){
+			try{
+				result = dao.updateInfo(id, familyName, lastName, familyNameKana, lastNameKana, mail,gender, postalCode, prefecture, address1, address2, authority);
 
-		}catch(SQLException e){
-			e.printStackTrace();
-		}catch(NoSuchAlgorithmException e){
-			e.printStackTrace();
+			}catch(SQLException e){
+				e.printStackTrace();
+			}
 		}
+
 		return result;
 	}
 
@@ -112,6 +122,12 @@ public class UpdateCompleteAction extends ActionSupport{
 	}
 	public void setPasswordText(String passwordText){
 		this.passwordText = passwordText;
+	}
+	public String getPasswordChange(){
+		return passwordChange;
+	}
+	public void setPasswordChange(String passwordChange){
+		this.passwordChange = passwordChange;
 	}
 	public String getGender(){
 		return gender;

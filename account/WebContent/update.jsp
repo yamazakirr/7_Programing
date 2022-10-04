@@ -34,6 +34,8 @@
           </td>
           <td>
             <input type="text" class="text" name="familyName" maxlength="10" value="<s:property value='familyName'/>"><br>
+            <s:property value="familyName"/>
+
             <div class="errorMessage">
 				<s:if test="familyNameErrorMessage != null">
 	            	<s:property value="familyNameErrorMessage"/>
@@ -111,8 +113,8 @@
         		<label>パスワードの変更の有無</label>
         	</td>
         	<td>
-        		<input type="radio" name="passwordSelect" value="0" checked="checked">変更する
-        		<input type="radio" name="passwordSelect" value="1" checked="checked">変更しない
+        		<input type="radio" name="passwordChange" value="0" checked="checked">変更しない
+        		<input type="radio" name="passwordChange" value="1">変更する
         	</td>
         </tr>
 
@@ -151,7 +153,9 @@
           </td>
           <td>
             <select name="prefecture" id="prefecture">
-              <option value="北海道" selected>北海道</option>
+            	<s:property value="prefectureAll"/>
+
+<!--               <option value="北海道">北海道</option>
               <option value="青森県">青森県</option>
               <option value="岩手県">岩手県</option>
               <option value="宮城県">宮城県</option>
@@ -197,7 +201,7 @@
               <option value="大分県">大分県</option>
               <option value="宮崎県">宮崎県</option>
               <option value="鹿児島県">鹿児島県</option>
-              <option value="沖縄県">沖縄県</option>
+              <option value="沖縄県">沖縄県</option> -->
             </select>
             ※都道府県の初期値の設定は一旦飛ばす
           </td>

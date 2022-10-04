@@ -12,6 +12,7 @@ public class UpdateDTO {
 	private String gender;
 	private String postalCode;
 	private String prefecture;
+	private String prefectureAll;
 	private String address1;
 	private String address2;
 	private String authority;
@@ -78,6 +79,13 @@ public class UpdateDTO {
 	}
 	public void setPrefecture(String prefecture){
 		this.prefecture = prefecture;
+	}
+	public String getPrefectureAll(){
+		return prefectureAll;
+	}
+	public void setPrefectureAll(String prefectureAll){
+		System.out.println("prefectureAll : "+prefectureAll);
+		this.prefectureAll = prefectureAll;
 	}
 	public String getAddress1(){
 		return address1;
