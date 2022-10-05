@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ page import="com.diworksdev.account.dto.UpdateDTO" %>
+<%@ page import="com.diworksdev.account.action.UpdateAction" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -34,8 +36,6 @@
           </td>
           <td>
             <input type="text" class="text" name="familyName" maxlength="10" value="<s:property value='familyName'/>"><br>
-            <s:property value="familyName"/>
-
             <div class="errorMessage">
 				<s:if test="familyNameErrorMessage != null">
 	            	<s:property value="familyNameErrorMessage"/>
@@ -153,7 +153,36 @@
           </td>
           <td>
             <select name="prefecture" id="prefecture">
-            	<s:property value="prefectureAll"/>
+
+
+
+
+            	<%
+            	UpdateAction a = new UpdateAction();
+            	System.out.println("aaaaaaaaa   "+a.getPrefecture());
+				String prefecture = UpdateDTO.p;
+            	String[] prefectureAll = {"北海道","青森県","岩手県","宮城県","秋田県","山形県","福島県","茨城県","栃木県","群馬県","埼玉県","千葉県","東京都","神奈川県","新潟県","富山県","石川県","福井県","山梨県","長野県","岐阜県","静岡県","愛知県","三重県","滋賀県","京都府","大阪府","兵庫県","奈良県","和歌山県","鳥取県","島根県","岡山県","広島県","山口県","徳島県","香川県","愛媛県","高知県","福岡県","佐賀県","長崎県","熊本県","大分県","宮崎県","鹿児島県","沖縄県"};
+
+            	for(int i=0; i < prefectureAll.length; i++){
+            		if(prefectureAll[i].equals(prefecture)){
+            			System.out.println("対象の都道府県" + prefecture);
+
+            	%>
+            		<option value="<%=prefectureAll[i] %>" selected><%=prefectureAll[i] %></option>
+            	<%
+            		}else{
+            			System.out.println("prefecture[i] " + prefectureAll[i]);
+            	%>
+
+            		<option value="<%=prefectureAll[i] %>" ><%=prefectureAll[i] %></option>
+            	<%
+            		}
+            	}
+				%>
+
+
+
+
 
 <!--               <option value="北海道">北海道</option>
               <option value="青森県">青森県</option>
