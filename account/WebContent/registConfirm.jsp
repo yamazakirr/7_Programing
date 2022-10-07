@@ -130,6 +130,8 @@
       </table>
 		<div class="button">
 			<div>
+
+			<!-- formで記載する -->
 			<button type="button" onclick=history.back()>戻る</button>
 			</div>
 			<s:submit class="b" value="登録する"/>

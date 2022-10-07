@@ -49,15 +49,9 @@ public class UpdateDAO {
 				dto.setAddress2(resultSet.getString("address_2"));
 				dto.setAuthority(resultSet.getString("authority"));
 
-				System.out.println("データベースのfamilyName : "+resultSet.getString("family_name"));
-
 				dto.setPrefectureAll(this.prefectureAll);
 				updateDTO.add(dto);
 
-				for(int i = 0; i < updateDTO.size(); i++){
-					System.out.println("updateDTOのサイズ : "+updateDTO.size());
-					System.out.println("updateDTO  : "+updateDTO.get(i));
-				}
 			}
 		}catch(Exception e){
 			e.printStackTrace();

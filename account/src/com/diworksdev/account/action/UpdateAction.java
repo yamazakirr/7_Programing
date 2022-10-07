@@ -23,13 +23,13 @@ public class UpdateAction extends ActionSupport{
 //			■アカウント情報出力処理
 			updateList = updateDAO.getUserInfo(id);
 
-			System.out.println("updateList : "+ updateList);
-			System.out.println("id : "+id);
-
 //			■エラー処理判定
 			if(updateList == null){
 				return result;
 			}else{
+//				■prefectureに値を格納
+//				setPrefecture(updateList)
+
 				;
 			}
 
@@ -37,7 +37,6 @@ public class UpdateAction extends ActionSupport{
 			e.printStackTrace();
 		}
 
-		System.out.println("result : "+result);
 		result = SUCCESS;
 		return result;
 	}

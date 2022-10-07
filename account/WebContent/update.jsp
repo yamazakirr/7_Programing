@@ -8,6 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript"/>
 
 <link rel="stylesheet" type="text/css" href="./css/update.css"/>
 
@@ -27,6 +28,8 @@
 
 	<s:form action="UpdateConfirmAction">
 
+	 <input type="text" class="text" name="familyName" maxlength="10" value="<s:property value='familyName'/>">
+
     <s:iterator value="updateList">
 	<table>
 
@@ -35,12 +38,13 @@
             <label>名前（姓）</label>
           </td>
           <td>
-            <input type="text" class="text" name="familyName" maxlength="10" value="<s:property value='familyName'/>"><br>
+
             <div class="errorMessage">
 				<s:if test="familyNameErrorMessage != null">
 	            	<s:property value="familyNameErrorMessage"/>
 				</s:if>
             </div>
+
           </td>
         </tr>
         <tr>
@@ -102,7 +106,7 @@
           <td>
             <input type="password" class="text" name="password" maxlength="10" /><br>
             <div class="errorMessage">
-	            <s:if test="passwordErrorMessage != null">
+	            <s:if test="passwordErrorMessage != null && passwordChange ==1">
 	            	<s:property value="passwordErrorMessage"/>
 				</s:if>
             </div>
@@ -113,8 +117,15 @@
         		<label>パスワードの変更の有無</label>
         	</td>
         	<td>
-        		<input type="radio" name="passwordChange" value="0" checked="checked">変更しない
-        		<input type="radio" name="passwordChange" value="1">変更する
+        		<s:if test="passwordChange != 1">
+	        		<input type="radio" name="passwordChange" value="0" checked="checked">変更しない
+	        		<input type="radio" name="passwordChange" value="1">変更する
+        		</s:if>
+        		<s:if test="passwordChange == 1">
+	        		<input type="radio" name="passwordChange" value="0" >変更しない
+	        		<input type="radio" name="passwordChange" value="1" checked="checked">変更する
+        		</s:if>
+
         	</td>
         </tr>
 
@@ -152,87 +163,27 @@
             <label>住所（都道府県）</label>
           </td>
           <td>
-            <select name="prefecture" id="prefecture">
 
+          <form>
+			<select name="prefecture" id="prefecture">
+		     <script>
+		            var prefectureAll = ["北海道","青森県","岩手県","宮城県","秋田県","山形県","福島県","茨城県","栃木県","群馬県","埼玉県","千葉県","東京都","神奈川県","新潟県","富山県","石川県","福井県","山梨県","長野県","岐阜県","静岡県","愛知県","三重県","滋賀県","京都府","大阪府","兵庫県","奈良県","和歌山県","鳥取県","島根県","岡山県","広島県","山口県","徳島県","香川県","愛媛県","高知県","福岡県","佐賀県","長崎県","熊本県","大分県","宮崎県","鹿児島県","沖縄県"];
+		            var prefecture = "<s:property value='prefecture'/>";
 
+		            for(var i = 0; i < prefectureAll.length; i++){
+		            	if(prefectureAll[i] == prefecture){
+							document.write("<option selected>");
+		            	}else{
+		            		document.write("<option>");
+		            	}
+						document.write(prefectureAll[i]);
+						document.write("</option>");
+		            }
+		            console.log(prefecture);
+		      </script>
+		      </select>
+		     </form>
 
-
-            	<%
-            	UpdateAction a = new UpdateAction();
-            	System.out.println("aaaaaaaaa   "+a.getPrefecture());
-				String prefecture = UpdateDTO.p;
-            	String[] prefectureAll = {"北海道","青森県","岩手県","宮城県","秋田県","山形県","福島県","茨城県","栃木県","群馬県","埼玉県","千葉県","東京都","神奈川県","新潟県","富山県","石川県","福井県","山梨県","長野県","岐阜県","静岡県","愛知県","三重県","滋賀県","京都府","大阪府","兵庫県","奈良県","和歌山県","鳥取県","島根県","岡山県","広島県","山口県","徳島県","香川県","愛媛県","高知県","福岡県","佐賀県","長崎県","熊本県","大分県","宮崎県","鹿児島県","沖縄県"};
-
-            	for(int i=0; i < prefectureAll.length; i++){
-            		if(prefectureAll[i].equals(prefecture)){
-            			System.out.println("対象の都道府県" + prefecture);
-
-            	%>
-            		<option value="<%=prefectureAll[i] %>" selected><%=prefectureAll[i] %></option>
-            	<%
-            		}else{
-            			System.out.println("prefecture[i] " + prefectureAll[i]);
-            	%>
-
-            		<option value="<%=prefectureAll[i] %>" ><%=prefectureAll[i] %></option>
-            	<%
-            		}
-            	}
-				%>
-
-
-
-
-
-<!--               <option value="北海道">北海道</option>
-              <option value="青森県">青森県</option>
-              <option value="岩手県">岩手県</option>
-              <option value="宮城県">宮城県</option>
-              <option value="秋田県">秋田県</option>
-              <option value="山形県">山形県</option>
-              <option value="福島県">福島県</option>
-              <option value="茨城県">茨城県</option>
-              <option value="栃木県">栃木県</option>
-              <option value="群馬県">群馬県</option>
-              <option value="埼玉県">埼玉県</option>
-              <option value="千葉県">千葉県</option>
-              <option value="東京都">東京都</option>
-              <option value="神奈川県">神奈川県</option>
-              <option value="新潟県">新潟県</option>
-              <option value="富山県">富山県</option>
-              <option value="石川県">石川県</option>
-              <option value="福井県">福井県</option>
-              <option value="山梨県">山梨県</option>
-              <option value="長野県">長野県</option>
-              <option value="岐阜県">岐阜県</option>
-              <option value="静岡県">静岡県</option>
-              <option value="愛知県">愛知県</option>
-              <option value="三重県">三重県</option>
-              <option value="滋賀県">滋賀県</option>
-              <option value="京都府">京都府</option>
-              <option value="大阪府">大阪府</option>
-              <option value="兵庫県">兵庫県</option>
-              <option value="奈良県">奈良県</option>
-              <option value="和歌山県">和歌山県</option>
-              <option value="鳥取県">鳥取県</option>
-              <option value="島根県">島根県</option>
-              <option value="岡山県">岡山県</option>
-              <option value="広島県">広島県</option>
-              <option value="山口県">山口県</option>
-              <option value="徳島県">徳島県</option>
-              <option value="香川県">香川県</option>
-              <option value="愛媛県">愛媛県</option>
-              <option value="高知県">高知県</option>
-              <option value="福岡県">福岡県</option>
-              <option value="佐賀県">佐賀県</option>
-              <option value="長崎県">長崎県</option>
-              <option value="熊本県">熊本県</option>
-              <option value="大分県">大分県</option>
-              <option value="宮崎県">宮崎県</option>
-              <option value="鹿児島県">鹿児島県</option>
-              <option value="沖縄県">沖縄県</option> -->
-            </select>
-            ※都道府県の初期値の設定は一旦飛ばす
           </td>
         </tr>
         <tr>
@@ -285,6 +236,9 @@
 
       </table>
 
+
+
+
 		<div class="button">
 			<s:submit class="b" value="確認する"/>
 			<input type="hidden" name="id" value="<s:property value='id'/>">
@@ -292,6 +246,8 @@
     </s:iterator>
     </s:form>
     </div>
+
+
 
     <div id="footer">
       <p>フッター</p>

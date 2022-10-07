@@ -60,6 +60,9 @@ public class UpdateConfirmAction extends ActionSupport{
 //		■入力値エラー判定処理
 		System.out.println("rca.regexHiraKan : "+rca.regexHiraKan);
 
+
+		System.out.println("          aaaaaa"+familyName);
+
 		this.familyNameErrorMessage = rca.errorCheck(rca.regexHiraKan,familyName);
 		rca.errorCheckLists.add(this.familyNameErrorMessage);
 		this.lastNameErrorMessage = rca.errorCheck(rca.regexHiraKan, lastName);
@@ -70,6 +73,7 @@ public class UpdateConfirmAction extends ActionSupport{
 		rca.errorCheckLists.add(this.lastNameKanaErrorMessage);
 		this.mailErrorMessage = rca.errorCheck(rca.regexMail, mail);
 		rca.errorCheckLists.add(this.mailErrorMessage);
+
 
 		if(passwordChange.equals("1")){
 //			■パスワード変更する
@@ -94,8 +98,6 @@ public class UpdateConfirmAction extends ActionSupport{
 		rca.errorCheckLists.add(this.address1ErrorMessage);
 		this.address2ErrorMessage = rca.errorCheck(rca.regexAddress, address2);
 		rca.errorCheckLists.add(this.address2ErrorMessage);
-
-		System.out.println("errorCheckLists :"+rca.errorCheckLists);
 
 //		■UpdateActionからupdateListの値を取得
 		try{
