@@ -18,6 +18,12 @@ public class ListDTO {
 	public String registeredTime;
 	public String updateTime;
 
+//	■更新処理で使用
+	private String postalCode;
+	private String prefecture;
+	private String address1;
+	private String address2;
+
 //	■日付のフォーマット変換
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
@@ -113,6 +119,35 @@ public class ListDTO {
 		}catch(ParseException e){
 			e.printStackTrace();
 		}
+	}
+
+
+
+
+
+	public String getPostalCode(){
+		return postalCode;
+	}
+	public void setPostalCode(String postalCode){
+		this.postalCode = postalCode;
+	}
+	public String getPrefecture(){
+		return this.prefecture;
+	}
+	public void setPrefecture(String prefecture){
+		this.prefecture = prefecture;
+	}
+	public String getAddress1(){
+		return address1;
+	}
+	public void setAddress1(String address1){
+		this.address1 = address1;
+	}
+	public String getAddress2(){
+		return address2;
+	}
+	public void setAddress2(String address2){
+		this.address2 = address2;
 	}
 
 

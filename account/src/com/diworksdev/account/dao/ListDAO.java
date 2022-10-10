@@ -18,7 +18,8 @@ public class ListDAO {
 	public ArrayList<ListDTO> getListUserInfo() throws SQLException{
 		ArrayList<ListDTO> listDTO = new ArrayList<ListDTO>();
 
-		String sql = "SELECT id, family_name, last_name, family_name_kana, last_name_kana, mail, gender, authority, delete_flg, registered_time, update_time"
+		String sql = "SELECT id, family_name, last_name, family_name_kana, last_name_kana, mail, gender, authority, delete_flg, registered_time, update_time,"
+				+ " postal_code, prefecture, address_1, address_2"
 				+ " FROM login_user_transaction"
 				+ " ORDER BY id DESC";
 
@@ -44,6 +45,13 @@ public class ListDAO {
 				dto.setDeleteFlg(resultSet.getString("delete_flg"));
 				dto.setRegisteredTime(resultSet.getString("registered_time"));
 				dto.setUpdateTime(resultSet.getString("update_time"));
+
+
+				dto.setPostalCode(resultSet.getString("postal_code"));
+				dto.setPrefecture(resultSet.getString("prefecture"));
+
+				dto.setAddress1(resultSet.getString("address_1"));
+				dto.setAddress2(resultSet.getString("address_2"));
 
 				listDTO.add(dto);
 

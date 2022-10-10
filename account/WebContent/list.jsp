@@ -67,6 +67,17 @@
     					<s:form action="UpdateAction">
     						<s:submit value="更新"/>
     						<input type="hidden" value='<s:property value="id"/>' name="id">
+    						<input type="hidden" value='<s:property value="familyName"/>' name="familyName">
+    						<input type="hidden" value='<s:property value="lastName"/>' name="lastName">
+    						<input type="hidden" value='<s:property value="familyNameKana"/>' name="familyNameKana">
+    						<input type="hidden" value='<s:property value="lastNameKana"/>' name="lastNameKana">
+    						<input type="hidden" value='<s:property value="mail"/>' name="mail">
+    						<input type="hidden" value='<s:property value="gender"/>' name="gender">
+    						<input type="hidden" value='<s:property value="postalCode"/>' name="postalCode">
+    						<input type="hidden" value='<s:property value="authority"/>' name="authority">
+    						<input type="hidden" value='<s:property value="prefecture"/>' name="prefecture">
+    						<input type="hidden" value='<s:property value="address1"/>' name="address1">
+    						<input type="hidden" value='<s:property value="address2"/>' name="address2">
     					</s:form>
     				</td>
     			</tr>

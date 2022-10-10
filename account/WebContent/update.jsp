@@ -28,9 +28,10 @@
 
 	<s:form action="UpdateConfirmAction">
 
-	 <input type="text" class="text" name="familyName" maxlength="10" value="<s:property value='familyName'/>">
 
-    <s:iterator value="updateList">
+
+
+
 	<table>
 
 		<tr>
@@ -38,7 +39,7 @@
             <label>名前（姓）</label>
           </td>
           <td>
-
+			<input type="text" class="text" name="familyName" maxlength="10" value="<s:property value='familyName'/>"><br>
             <div class="errorMessage">
 				<s:if test="familyNameErrorMessage != null">
 	            	<s:property value="familyNameErrorMessage"/>
@@ -104,7 +105,7 @@
             <label>パスワード</label>
           </td>
           <td>
-            <input type="password" class="text" name="password" maxlength="10" /><br>
+			<input type="text" class="text" name="password" maxlength="10" value="<s:property value='password' />"><br>
             <div class="errorMessage">
 	            <s:if test="passwordErrorMessage != null && passwordChange ==1">
 	            	<s:property value="passwordErrorMessage"/>
@@ -135,11 +136,11 @@
             <label>性別</label>
           </td>
           <td>
-          	<s:if test="gender == 0">
+          	<s:if test="gender == '男性'">
 	            <input type="radio"  name="gender" value="0" checked="checked">男性
 	            <input type="radio"  name="gender" value="1">女性
           	</s:if>
-          	<s:if test="gender == 1">
+          	<s:if test="gender == '女性'">
 	            <input type="radio"  name="gender" value="0" >男性
 	            <input type="radio"  name="gender" value="1" checked="checked">女性
           	</s:if>
@@ -217,13 +218,13 @@
             <label>アカウント権限</label>
           </td>
           <td>
-			<s:if test="authority == 0">
+			<s:if test="authority == '一般'">
 	            <select name="authority">
 	            	<option value="0" selected>一般</option>
 	            	<option value="1">管理者</option>
 	            </select>
 			</s:if>
-			<s:if test="authority == 1">
+			<s:if test="authority == '管理者'">
 	            <select name="authority">
 	            	<option value="0" >一般</option>
 	            	<option value="1" selected>管理者</option>
@@ -243,7 +244,7 @@
 			<s:submit class="b" value="確認する"/>
 			<input type="hidden" name="id" value="<s:property value='id'/>">
 		</div>
-    </s:iterator>
+
     </s:form>
     </div>
 
