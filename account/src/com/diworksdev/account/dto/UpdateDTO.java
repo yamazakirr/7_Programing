@@ -1,5 +1,7 @@
 package com.diworksdev.account.dto;
 
+//UpdateAction.javaとUpdateDAO.javaの処理内容を更新後、削除予定
+
 public class UpdateDTO {
 
 	private String id;
@@ -83,8 +85,8 @@ public class UpdateDTO {
 		this.prefecture = prefecture;
 		p = prefecture;
 	}
-	
-	
+
+
 	public String getPrefectureAll(){
 		return prefectureAll;
 	}

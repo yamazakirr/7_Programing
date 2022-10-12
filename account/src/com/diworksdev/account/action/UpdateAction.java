@@ -1,10 +1,8 @@
 package com.diworksdev.account.action;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import com.diworksdev.account.dao.UpdateDAO;
-import com.diworksdev.account.dto.UpdateDTO;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class UpdateAction extends ActionSupport{
@@ -24,7 +22,6 @@ public class UpdateAction extends ActionSupport{
 	private String address2;
 
 
-	private ArrayList<UpdateDTO> updateList = new ArrayList<UpdateDTO>();
 	private UpdateDAO updateDAO = new UpdateDAO();
 
 	public String execute(){
@@ -32,15 +29,14 @@ public class UpdateAction extends ActionSupport{
 
 		try{
 //			■アカウント情報出力処理
-			updateList = updateDAO.getUserInfo(id);
+			result = updateDAO.getUserInfo(id);
 
 //			■エラー処理判定
-			if(updateList == null){
+			if(result.equals("error")){
 				return result;
 			}else{
 //				■prefectureに値を格納
 //				setPrefecture(updateList)
-
 				;
 			}
 
@@ -126,10 +122,6 @@ public class UpdateAction extends ActionSupport{
 		this.address2 = address2;
 	}
 
-
-	public ArrayList<UpdateDTO> getUpdateList(){
-		return this.updateList;
-	}
 
 }
 

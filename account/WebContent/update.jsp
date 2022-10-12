@@ -105,7 +105,32 @@
             <label>パスワード</label>
           </td>
           <td>
-			<input type="text" class="text" name="password" maxlength="10" value="<s:property value='password' />"><br>
+			<input type="password" class="text" id="input_pass" name="password" maxlength="10" value="<s:property value='password' />">
+			<button id="btn_passview">表示</button>
+
+			<script>
+				window.addEventListener('DOMContentLoaded', function(){
+
+					let btn_passview = document.getElementById("btn_passview");
+					let input_pass = document.getElementById("input_pass");
+
+					btn_passview.addEventListener("click", (e)=>{
+						e.preventDefault();
+
+						if(input_pass.type === 'password'){
+							input_pass.type = 'text';
+							btn_passview.textContent = '非表示';
+						}else{
+							input_pass.type = 'password';
+							btn_passview.textContent = '表示';
+						}
+					});
+				});
+
+
+			</script>
+
+			<br>
             <div class="errorMessage">
 	            <s:if test="passwordErrorMessage != null && passwordChange ==1">
 	            	<s:property value="passwordErrorMessage"/>

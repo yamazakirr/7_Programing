@@ -1,10 +1,8 @@
 package com.diworksdev.account.action;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
 
-import com.diworksdev.account.dao.UpdateDAO;
 import com.diworksdev.account.dto.UpdateDTO;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -51,7 +49,7 @@ public class UpdateConfirmAction extends ActionSupport{
 //	--------------------------------------------
 
 	private ArrayList<UpdateDTO> updateList = new ArrayList<UpdateDTO>();
-	private UpdateDAO updateDAO = new UpdateDAO();
+//	private UpdateDAO updateDAO = new UpdateDAO();
 	private RegistConfirmAction rca = new RegistConfirmAction();
 
 	public String execute(){
@@ -99,15 +97,16 @@ public class UpdateConfirmAction extends ActionSupport{
 		this.address2ErrorMessage = rca.errorCheck(rca.regexAddress, address2);
 		rca.errorCheckLists.add(this.address2ErrorMessage);
 
-//		■UpdateActionからupdateListの値を取得
-		try{
-			updateList = updateDAO.getUserInfo(id);
-			System.out.println("updateListの結果 : "+updateList);
-			System.out.println("idの結果 :"+id);
-
-		}catch(SQLException e){
-			e.printStackTrace();
-		}
+//		■UpdateActionからupdateListの値を取得（削除可否確認中）
+//		try{
+//
+//			updateList = updateDAO.getUserInfo(id);
+//			System.out.println("updateListの結果 : "+updateList);
+//			System.out.println("idの結果 :"+id);
+//
+//		}catch(SQLException e){
+//			e.printStackTrace();
+//		}
 
 //		--------------------------------------------
 //		■全体のエラーチェック
