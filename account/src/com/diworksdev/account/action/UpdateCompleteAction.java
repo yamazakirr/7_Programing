@@ -169,10 +169,9 @@ public class UpdateCompleteAction extends ActionSupport{
 	public void setAuthority(String authority){
 		if(authority.equals("一般")){
 			this.authority = "0";
-		}else if(authority.equals("1")){
+		}else if(authority.equals("管理者")){
 			this.authority = "1";
 		}
-
 	}
 
 }

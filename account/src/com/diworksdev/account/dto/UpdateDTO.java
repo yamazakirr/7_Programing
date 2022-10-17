@@ -110,6 +110,7 @@ public class UpdateDTO {
 		return authority;
 	}
 	public void setAuthority(String authority){
+		System.out.println("UpdateDTO.javaのauthority : "+authority);
 		this.authority = authority;
 	}
 
