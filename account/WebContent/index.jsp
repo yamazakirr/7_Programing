@@ -29,8 +29,12 @@
 			<li>登録フォーム</li>
 			<li>問い合わせ</li>
 			<li>その他</li>
-			<li><a href='<s:url action="RegistAction"/>'>アカウント登録</a></li>
-			<li><a href='<s:url action="ListAction"/>'>アカウント一覧</a></li>
+
+			<!-- アカウント権限が「管理者」の人のみ表示 -->
+			<s:if test="authority == 1">
+				<li><a href='<s:url action="RegistAction"/>'>アカウント登録</a></li>
+				<li><a href='<s:url action="ListAction"/>'>アカウント一覧</a></li>
+			</s:if>
 		</ul>
 	</div>
 	<div id="main">
