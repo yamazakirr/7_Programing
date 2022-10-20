@@ -1,14 +1,16 @@
 package com.diworksdev.account.action;
 
 import java.sql.SQLException;
+import java.util.Map;
+
+import org.apache.struts2.interceptor.SessionAware;
 
 import com.diworksdev.account.dao.LoginDAO;
 import com.opensymphony.xwork2.ActionSupport;
 
+public class LoginAction extends ActionSupport implements SessionAware{
 
-public class LoginAction extends ActionSupport{
-
-
+	public Map<String, Object> session;
 
 	private String loginUserId;
 	private String loginUserPassword;
@@ -29,9 +31,12 @@ public class LoginAction extends ActionSupport{
 			result = dao.getLoginResult(loginUserId, loginUserPassword);
 			setAuthority(dao.getAuthority());
 
-			String s = dao.getLoginErrorMessage();
-			if(s.equals("")){
-				;
+			String loginErrorMessage = dao.getLoginErrorMessage();
+			if(loginErrorMessage.equals("")){
+
+//				■sessionにmailとauthorityの情報を格納
+				session.put("login_user_id", loginUserId);
+				session.put("authority", authority);
 			}else{
 				this.loginErrorMessage = dao.getLoginErrorMessage();
 			}
@@ -75,5 +80,10 @@ public class LoginAction extends ActionSupport{
 	}
 	public void setLoginErrorMessage(String loginErrorMessage){
 		this.loginErrorMessage = loginErrorMessage;
+	}
+
+//	@Override
+	public void setSession(Map<String, Object> session){
+		this.session = session;
 	}
 }

@@ -23,6 +23,9 @@
 
     <div id="main">
 
+    	<s:property value="#session.login_user_id"/>
+    	<s:property value="#session.authority"/>
+
     	<s:if test="accountList == null">
     		<h3>登録情報はありません。</h3>
     	</s:if>

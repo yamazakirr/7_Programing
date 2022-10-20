@@ -50,6 +50,7 @@ public class LoginDAO {
 			if(resultSet.next()){
 
 				this.authority = resultSet.getString("authority");
+				this.loginErrorMessage = "";
 				result = "success";
 
 

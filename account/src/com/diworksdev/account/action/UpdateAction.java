@@ -1,11 +1,14 @@
 package com.diworksdev.account.action;
 
 import java.sql.SQLException;
+import java.util.Map;
+
+import org.apache.struts2.interceptor.SessionAware;
 
 import com.diworksdev.account.dao.UpdateDAO;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class UpdateAction extends ActionSupport{
+public class UpdateAction extends ActionSupport implements SessionAware{
 
 	private String id;
 	private String familyName;
@@ -21,30 +24,37 @@ public class UpdateAction extends ActionSupport{
 	private String address1;
 	private String address2;
 
+	public Map<String, Object> session;
+
 
 	private UpdateDAO updateDAO = new UpdateDAO();
 
 	public String execute(){
 		String result = ERROR;
 
-		try{
-//			■アカウント情報出力処理
-			result = updateDAO.getUserInfo(id);
+		if(session.containsKey("login_user_id") && session.get("authority").equals("1")){
+			try{
+				//			■アカウント情報出力処理
+				result = updateDAO.getUserInfo(id);
 
-//			■エラー処理判定
-			if(result.equals("error")){
-				return result;
-			}else{
-//				■prefectureに値を格納
-//				setPrefecture(updateList)
-				;
+				//			■エラー処理判定
+				if(result.equals("error")){
+					return result;
+				}else{
+					//				■prefectureに値を格納
+					//				setPrefecture(updateList)
+					;
+				}
+
+			}catch(SQLException e){
+				e.printStackTrace();
 			}
 
-		}catch(SQLException e){
-			e.printStackTrace();
-		}
+			result = SUCCESS;
+			return result;
 
-		result = SUCCESS;
+		}
+		result = "noAuthority";
 		return result;
 	}
 
@@ -122,6 +132,10 @@ public class UpdateAction extends ActionSupport{
 		this.address2 = address2;
 	}
 
+//	@Override
+	public void setSession(Map<String, Object> session){
+		this.session = session;
+	}
 
 }
 

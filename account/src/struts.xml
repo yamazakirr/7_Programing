@@ -40,11 +40,13 @@
 	<action name="ListAction" class="com.diworksdev.account.action.ListAction" method="execute">
 	<result name="success">list.jsp</result>
 	<result name="error">listError.jsp</result>
+	<result name="noAuthority">login.jsp</result>
 	</action>
 
 <!-- DeleteAction -->
 	<action name="DeleteAction" class="com.diworksdev.account.action.DeleteAction" method="execute">
 	<result name="success">delete.jsp</result>
+	<result name="noAuthority">login.jsp</result>
 	</action>
 
 <!-- DeleteConfirmAction -->
@@ -60,6 +62,7 @@
 <!-- UpdateAction -->
 	<action name="UpdateAction" class="com.diworksdev.account.action.UpdateAction" method="execute">
 	<result name="success">update.jsp</result>
+	<result name="noAuthority">login.jsp</result>
 	</action>
 
 <!-- UpdateConfirmAction -->

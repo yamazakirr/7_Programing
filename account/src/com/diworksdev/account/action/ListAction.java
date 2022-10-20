@@ -20,13 +20,20 @@ public class ListAction extends ActionSupport implements SessionAware{
 
 	public String execute() throws SQLException{
 
-		accountList = listDAO.getListUserInfo();
+		if(session.containsKey("login_user_id") && session.get("authority").equals("1")){
+			accountList = listDAO.getListUserInfo();
 
-		if(accountList == null){
-			return ERROR;
+			if(accountList == null){
+				return ERROR;
+			}else{
+				return SUCCESS;
+			}
+
 		}else{
-			return SUCCESS;
+			String result = "noAuthority";
+			return result;
 		}
+
 	}
 
 // @Override
