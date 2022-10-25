@@ -35,6 +35,7 @@
 				<li><a href='<s:url action="RegistAction"/>'>アカウント登録</a></li>
 				<li><a href='<s:url action="ListAction"/>'>アカウント一覧</a></li>
 			</s:if>
+			<li><a href='<s:url action="LogoutAction"/>'>ログアウト</a></li>
 		</ul>
 	</div>
 	<div id="main">

@@ -6,21 +6,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>アカウント更新完了画面</title>
+<title>ログアウト</title>
 </head>
 <body>
 
-<h1>アカウントの更新が完了しました。</h1>
+	<h1>ログアウトが完了しました</h1>
 
-<div>
-	<s:form action="LoginAction">
-		<s:submit value="TOPページに戻る"/>
-	</s:form>
-
-	<s:form action="LogoutAction">
-		<s:submit value="ログアウト"/>
-	</s:form>
-</div>
+	<s:form action="HomeAction">
+			<s:submit value="ログイン画面に戻る"/>
+		</s:form>
 
 </body>
 </html>

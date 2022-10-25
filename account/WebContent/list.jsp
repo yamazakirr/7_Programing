@@ -18,7 +18,7 @@
 </div>
 
 <div id="header">
-		<p><b>アカウント一覧</b></p>
+		<p><b>アカウント一覧画面</b></p>
 	</div>
 
     <div id="main">
@@ -26,8 +26,47 @@
     	<s:property value="#session.login_user_id"/>
     	<s:property value="#session.authority"/>
 
+
+		<s:form action="SearchAction">
+			<table border="1">
+				<tr>
+					<td>名前（姓）</td>
+					<td><input type="text" name="searchFamilyName"></td>
+					<td>名前（名）</td>
+					<td><input type="text" name="searchLastName"></td>
+				</tr>
+				<tr>
+					<td>カナ（姓）</td>
+					<td><input type="text" name="searchFamilyNameKana"></td>
+					<td>カナ（名）</td>
+					<td><input type="text" name="searchLastName"></td>
+				</tr>
+				<tr>
+					<td>メールアドレス</td>
+					<td><input type="text" name="searchMail"></td>
+					<td>性別</td>
+					<td>
+						<input type="radio"  name="searchGender" value="0" checked="checked">男性
+						<input type="radio"  name="searchGender" value="1">女性
+					</td>
+				</tr>
+				<tr>
+					<td>アカウント権限</td>
+					<td>
+						<select name="searchAuthority">
+			            	<option value="0">一般</option>
+			            	<option value="1">管理者</option>
+			            </select>
+					</td>
+				</tr>
+			</table>
+
+			<s:submit value="検索"/>
+		</s:form>
+
+
     	<s:if test="accountList == null">
-    		<h3>登録情報はありません。</h3>
+    		<h3>該当する登録情報はありません。</h3>
     	</s:if>
     	<s:elseif test="accountList != null">
     		<table border="1">
@@ -45,6 +84,9 @@
     			<th>更新日時</th>
     			<th colspan="2">操作</th>
     		</tr>
+
+
+
 
     		<s:iterator value="accountList">
     			<tr>

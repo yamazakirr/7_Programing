@@ -6,17 +6,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.diworksdev.account.dto.ListDTO;
+import com.diworksdev.account.dto.SearchDTO;
 import com.diworksdev.account.util.DBConnector;
 
 
-public class ListDAO {
+public class SearchDAO {
 
 	private DBConnector dbConnector = new DBConnector();
 	private Connection connection = dbConnector.getConnection();
 
-	public ArrayList<ListDTO> getListUserInfo() throws SQLException{
-		ArrayList<ListDTO> listDTO = new ArrayList<ListDTO>();
+	public ArrayList<SearchDTO> getListUserInfo(String familyName, String lastName, String familyNameKana, String lastNameKana, String mail, String gender, String authority) throws SQLException{
+		ArrayList<SearchDTO> listDTO = new ArrayList<SearchDTO>();
 
 		String sql = "SELECT id, family_name, last_name, family_name_kana, last_name_kana, mail, gender, authority, delete_flg, registered_time, update_time,"
 				+ " postal_code, prefecture, address_1, address_2"
@@ -33,7 +33,7 @@ public class ListDAO {
 			System.out.println("DAO ①");
 
 			while(resultSet.next()){
-				ListDTO dto = new ListDTO();
+				SearchDTO dto = new SearchDTO();
 				dto.setId(resultSet.getString("id"));
 				dto.setFamilyName(resultSet.getString("family_name"));
 				dto.setLastName(resultSet.getString("last_name"));
@@ -73,5 +73,6 @@ public class ListDAO {
 		return listDTO;
 
 	}
+
 
 }

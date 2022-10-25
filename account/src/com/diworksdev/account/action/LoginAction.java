@@ -27,30 +27,45 @@ public class LoginAction extends ActionSupport implements SessionAware{
 		String result = ERROR;
 
 //		データベース上のログイン情報を取得するメソッド呼び出し
-		try{
-			result = dao.getLoginResult(loginUserId, loginUserPassword);
-			setAuthority(dao.getAuthority());
 
-			String loginErrorMessage = dao.getLoginErrorMessage();
-			if(loginErrorMessage.equals("")){
+//			■ログイン済み判定
+//			if(session.containsKey("authority")){
+//				System.out.println("ログイン済み");
+//				System.out.println("ログインID"+session.get("login_user_id"));
+//				System.out.println("アカウント権限"+session.get("authority"));
+//
+//				result = SUCCESS;
+//				return result;
+//			}else{
+//				■未ログインの場合
+				try{
+//				System.out.println("未ログイン");
+				result = dao.getLoginResult(loginUserId, loginUserPassword);
+				setAuthority(dao.getAuthority());
 
-//				■sessionにmailとauthorityの情報を格納
-				session.put("login_user_id", loginUserId);
-				session.put("authority", authority);
-			}else{
-				this.loginErrorMessage = dao.getLoginErrorMessage();
+				String loginErrorMessage = dao.getLoginErrorMessage();
+				if(loginErrorMessage.equals("")){
+
+					//				■sessionにmailとauthorityの情報を格納
+					session.put("login_user_id", loginUserId);
+					session.put("authority", authority);
+				}else{
+					this.loginErrorMessage = dao.getLoginErrorMessage();
+				}
+
+				System.out.println("認証の結果 : "+result);
+				System.out.println("アカウント権限の値 ： "+this.authority);
+
+
+			}catch(SQLException e){
+				e.printStackTrace();
 			}
 
-			System.out.println("認証の結果 : "+result);
-			System.out.println("アカウント権限の値 ： "+this.authority);
+			return result;
 
+			}
 
-		}catch(SQLException e){
-			e.printStackTrace();
-		}
-
-		return result;
-	}
+//	}
 
 
 

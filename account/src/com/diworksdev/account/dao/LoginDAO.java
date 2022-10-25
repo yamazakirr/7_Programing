@@ -68,6 +68,7 @@ public class LoginDAO {
 			e.printStackTrace();
 		}finally{
 			if(connection == null){
+				result = "networkError";
 				return result;
 			}else{
 				connection.close();

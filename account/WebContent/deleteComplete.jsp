@@ -18,9 +18,16 @@
 
     <div id="main">
 	    <h1>削除完了しました</h1>
-
-
     </div>
+
+    <s:form action="LoginAction">
+		<s:submit value="TOPページに戻る"/>
+	</s:form>
+
+    <s:form action="LogoutAction">
+		<s:submit value="ログアウト"/>
+	</s:form>
+
 
     <div id="footer">
       	<p>フッター</p>
