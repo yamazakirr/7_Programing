@@ -17,20 +17,58 @@ public class SearchDAO {
 
 	public ArrayList<SearchDTO> getListUserInfo(String familyName, String lastName, String familyNameKana, String lastNameKana, String mail, String gender, String authority) throws SQLException{
 		ArrayList<SearchDTO> listDTO = new ArrayList<SearchDTO>();
+		String sql;
+		ResultSet resultSet;
 
-		String sql = "SELECT id, family_name, last_name, family_name_kana, last_name_kana, mail, gender, authority, delete_flg, registered_time, update_time,"
-				+ " postal_code, prefecture, address_1, address_2"
-				+ " FROM login_user_transaction"
-				+ " ORDER BY id DESC";
+		System.out.println("familyName "+familyName);
+		System.out.println("lastName "+lastName);
+		System.out.println("familyNameKana "+familyNameKana);
+		System.out.println("lastNameKana "+lastNameKana);
+		System.out.println("mail "+mail);
+		System.out.println("gender "+gender);
+		System.out.println("authority "+authority);
+
+
 
 		try{
-			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+//			■genderとauthority以外は空欄で検索
+			if(familyName.equals("") && lastName.equals("") && familyNameKana.equals("") && lastNameKana.equals("") && mail.equals("")){
+				System.out.println("genderとauthority以外は文字指定なし");
 
+				sql = "SELECT id, family_name, last_name, family_name_kana, last_name_kana, mail, gender, authority, delete_flg, registered_time, update_time,"
+					+ " postal_code, prefecture, address_1, address_2"
+					+ " FROM login_user_transaction"
+					+ " WHERE gender=? OR authority=?"
+					+ " ORDER BY id DESC";
 
-			ResultSet resultSet = preparedStatement.executeQuery();
+				PreparedStatement preparedStatement = connection.prepareStatement(sql);
+				preparedStatement.setString(1, gender);
+				preparedStatement.setString(2, authority);
 
-			System.out.println("DAO ①");
-			System.out.println("DAO ①");
+				resultSet = preparedStatement.executeQuery();
+
+//			■genderとauthority以外に文字指定ありで検索
+			}else{
+				System.out.println("文字指定あり");
+
+				sql = "SELECT id, family_name, last_name, family_name_kana, last_name_kana, mail, gender, authority, delete_flg, registered_time, update_time,"
+						+ " postal_code, prefecture, address_1, address_2"
+						+ " FROM login_user_transaction"
+						+ " WHERE family_name LIKE '%?%' OR last_name LIKE '%?%' OR family_name_kana LIKE '%?%' OR last_name_kana LIKE '%?%' OR"
+						+ " mail LIKE '%?%' OR gender LIKE '%?%' OR authority LIKE '%?%' "
+						+ " ORDER BY id DESC";
+
+				PreparedStatement preparedStatement = connection.prepareStatement(sql);
+				preparedStatement.setString(1, familyName);
+				preparedStatement.setString(2, lastName);
+				preparedStatement.setString(3, familyNameKana);
+				preparedStatement.setString(4, lastNameKana);
+				preparedStatement.setString(5, mail);
+				preparedStatement.setString(6, gender);
+				preparedStatement.setString(7, authority);
+
+				resultSet = preparedStatement.executeQuery();
+			}
 
 			while(resultSet.next()){
 				SearchDTO dto = new SearchDTO();

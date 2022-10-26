@@ -39,7 +39,7 @@
 					<td>カナ（姓）</td>
 					<td><input type="text" name="searchFamilyNameKana"></td>
 					<td>カナ（名）</td>
-					<td><input type="text" name="searchLastName"></td>
+					<td><input type="text" name="searchLastNameKana"></td>
 				</tr>
 				<tr>
 					<td>メールアドレス</td>
