@@ -29,46 +29,107 @@ public class SearchDAO {
 		System.out.println("authority "+authority);
 
 
+		ArrayList<String> checkLists = new ArrayList<String>();
+//		■checkListsの作成
+//		 値が入っている場合のみcheckListsに変数名を追加する
+
+//		■見にくいためArrayListなどに格納し繰り返し処理として変更予定========================
+		if(!familyName.equals("")){
+			checkLists.add("familyName");
+		}
+		if(!lastName.equals("")){
+			checkLists.add("lastName");
+		}
+		if(!familyNameKana.equals("")){
+			checkLists.add("familyNameKana");
+		}
+		if(!lastNameKana.equals("")){
+			checkLists.add("lastNameKana");
+		}
+		if(!mail.equals("")){
+			checkLists.add("mail");
+		}
+		if(!gender.equals("")){
+			checkLists.add("gender");
+		}
+		if(!authority.equals("")){
+			checkLists.add("authority");
+		}
+//		========================================================================
+
+		System.out.println("checkListのサイズ ■"+checkLists.size());
+
+		sql = "SELECT id, family_name, last_name, family_name_kana, last_name_kana, mail, gender, authority, delete_flg, registered_time, update_time,"
+				+ " postal_code, prefecture, address_1, address_2"
+				+ " FROM login_user_transaction"
+				+ " WHERE";
+
+
+		int size = checkLists.size() -1;
+
+//		■SQL文にWHERE句以降を追加する処理
+		for(int i =0; i <= size; i++){
+			if(checkLists.get(i).equals("familyName")){
+				sql += " family_name LIKE ?";
+			}else if(checkLists.get(i).equals("lastName")){
+				sql += " last_name LIKE ?";
+			}else if(checkLists.get(i).equals("familyNameKana")){
+				sql += " family_name_kana LIKE ?";
+			}else if(checkLists.get(i).equals("lastNameKana")){
+				sql += " last_name_kana LIKE ?";
+			}else if(checkLists.get(i).equals("mail")){
+				sql += " mail LIKE ?";
+			}else if(checkLists.get(i).equals("gender")){
+				sql += " gender=?";
+			}else if(checkLists.get(i).equals("authority")){
+				sql += " authority=?";
+			}
+
+//			■checkListsの最後の要素の場合は「AND」は追加しない
+			if(i != size){
+				sql += " AND";
+			}
+		}
+
+		sql += " ORDER BY id DESC";
+
+		System.out.println("sql文 "+sql);
 
 		try{
-//			■genderとauthority以外は空欄で検索
-			if(familyName.equals("") && lastName.equals("") && familyNameKana.equals("") && lastNameKana.equals("") && mail.equals("")){
-				System.out.println("genderとauthority以外は文字指定なし");
-
-				sql = "SELECT id, family_name, last_name, family_name_kana, last_name_kana, mail, gender, authority, delete_flg, registered_time, update_time,"
-					+ " postal_code, prefecture, address_1, address_2"
-					+ " FROM login_user_transaction"
-					+ " WHERE gender=? OR authority=?"
-					+ " ORDER BY id DESC";
-
 				PreparedStatement preparedStatement = connection.prepareStatement(sql);
-				preparedStatement.setString(1, gender);
-				preparedStatement.setString(2, authority);
+
+//				■checkListsの内容ごとに「？」に値を挿入する処理
+				int i = 1;
+				for(String checkList : checkLists){
+					if(checkList.equals("familyName")){
+						preparedStatement.setString(i, "%" +familyName + "%");
+						i++;
+					}else if(checkList.equals("lastName")){
+						preparedStatement.setString(i, "%" +lastName + "%");
+						i++;
+					}else if(checkList.equals("familyNameKana")){
+						preparedStatement.setString(i, "%" +familyNameKana + "%");
+						i++;
+					}else if(checkList.equals("lastNameKana")){
+						preparedStatement.setString(i, "%" +lastNameKana + "%");
+						i++;
+					}else if(checkList.equals("mail")){
+						preparedStatement.setString(i, "%" +mail + "%");
+						i++;
+					}else if(checkList.equals("gender")){
+						preparedStatement.setString(i, "%" +gender + "%");
+						i++;
+					}else if(checkList.equals("authority")){
+						preparedStatement.setString(i, "%" +authority + "%");
+						i++;
+					}
+				}
+
+				System.out.println("checkListsのサイズ "+checkLists.size());
+				System.out.println("?の数 "+(i-1));
+
 
 				resultSet = preparedStatement.executeQuery();
-
-//			■genderとauthority以外に文字指定ありで検索
-			}else{
-				System.out.println("文字指定あり");
-
-				sql = "SELECT id, family_name, last_name, family_name_kana, last_name_kana, mail, gender, authority, delete_flg, registered_time, update_time,"
-						+ " postal_code, prefecture, address_1, address_2"
-						+ " FROM login_user_transaction"
-						+ " WHERE family_name LIKE '%?%' OR last_name LIKE '%?%' OR family_name_kana LIKE '%?%' OR last_name_kana LIKE '%?%' OR"
-						+ " mail LIKE '%?%' OR gender LIKE '%?%' OR authority LIKE '%?%' "
-						+ " ORDER BY id DESC";
-
-				PreparedStatement preparedStatement = connection.prepareStatement(sql);
-				preparedStatement.setString(1, familyName);
-				preparedStatement.setString(2, lastName);
-				preparedStatement.setString(3, familyNameKana);
-				preparedStatement.setString(4, lastNameKana);
-				preparedStatement.setString(5, mail);
-				preparedStatement.setString(6, gender);
-				preparedStatement.setString(7, authority);
-
-				resultSet = preparedStatement.executeQuery();
-			}
 
 			while(resultSet.next()){
 				SearchDTO dto = new SearchDTO();
