@@ -41,7 +41,7 @@
 	<result name="success">list.jsp</result>
 	</action>
 
-<!-- ListAction -->
+<!-- SearchAction -->
 	<action name="SearchAction" class="com.diworksdev.account.action.SearchAction" method="execute">
 	<result name="success">list.jsp</result>
 	<result name="error">listError.jsp</result>

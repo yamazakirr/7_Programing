@@ -21,6 +21,8 @@
 </head>
 <body>
 
+	アカウント権限 : <s:property value="authority"/>
+
 	<div id="header">
 		<ul>
 			<li>トップ</li>

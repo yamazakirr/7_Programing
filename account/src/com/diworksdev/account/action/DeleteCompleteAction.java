@@ -13,6 +13,7 @@ public class DeleteCompleteAction extends ActionSupport implements SessionAware{
 
 	private String id;
 	public Map<String, Object> session;
+	private String authority;
 
 	public String execute(){
 		String result = ERROR;
@@ -40,6 +41,13 @@ public class DeleteCompleteAction extends ActionSupport implements SessionAware{
 		System.out.println("DeleteCompleteAction の set のid : "+id);
 		this.id = id;
 	}
+	public String getAuthority(){
+		return authority;
+	}
+	public void setAuthority(String authority){
+		this.authority = authority;
+	}
+
 //	@Override
 	public void setSession(Map<String, Object> session){
 		this.session = session;

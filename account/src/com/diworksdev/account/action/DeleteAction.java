@@ -15,6 +15,7 @@ public class DeleteAction extends ActionSupport implements SessionAware{
 
 	private String id;
 	public Map<String, Object> session;
+	private String authority;
 
 	DeleteDAO deleteDAO = new DeleteDAO();
 	private ArrayList<DeleteDTO> deleteList = new ArrayList<DeleteDTO>();
@@ -54,6 +55,12 @@ public class DeleteAction extends ActionSupport implements SessionAware{
 	}
 	public void setId(String id){
 		this.id = id;
+	}
+	public String getAuthority(){
+		return authority;
+	}
+	public void setAuthority(String authority){
+		this.authority = authority;
 	}
 
 	public ArrayList<DeleteDTO> getDeleteList(){

@@ -24,48 +24,67 @@
     <div id="main">
 
     	<s:property value="#session.login_user_id"/>
-    	<s:property value="#session.authority"/>
+    	<s:property value="#session.authority"/><br>
+
 
 
 		<s:form action="SearchAction">
 			<table border="1">
 				<tr>
 					<td>名前（姓）</td>
-					<td><input type="text" name="searchFamilyName"></td>
+					<td><input type="text" name="familyName" value="<s:property value='familyName'/>"></td>
 					<td>名前（名）</td>
-					<td><input type="text" name="searchLastName"></td>
+					<td><input type="text" name="lastName" value="<s:property value='lastName'/>"></td>
 				</tr>
 				<tr>
 					<td>カナ（姓）</td>
-					<td><input type="text" name="searchFamilyNameKana"></td>
+					<td><input type="text" name="familyNameKana" value="<s:property value='familyNameKana'/>"></td>
 					<td>カナ（名）</td>
-					<td><input type="text" name="searchLastNameKana"></td>
+					<td><input type="text" name="lastNameKana" value="<s:property value='lastNameKana'/>"></td>
 				</tr>
 				<tr>
 					<td>メールアドレス</td>
-					<td><input type="text" name="searchMail"></td>
+					<td><input type="text" name="mail" value="<s:property value='mail'/>"></td>
 					<td>性別</td>
 					<td>
-						<input type="radio"  name="searchGender" value="0" checked="checked">男性
-						<input type="radio"  name="searchGender" value="1">女性
+						<s:if test="gender == 0 || gender == null ">
+							<input type="radio"  name="gender" value="0" checked="checked">男性
+							<input type="radio"  name="gender" value="1">女性
+						</s:if>
+						<s:if test="gender == 1 ">
+							<input type="radio"  name="gender" value="0" >男性
+							<input type="radio"  name="gender" value="1" checked="checked">女性
+						</s:if>
 					</td>
 				</tr>
 				<tr>
 					<td>アカウント権限</td>
 					<td>
-						<select name="searchAuthority">
-			            	<option value="0">一般</option>
-			            	<option value="1">管理者</option>
-			            </select>
+						<s:if test="authority == 0 || authority == null ">
+							<select name="authority">
+				            	<option value="0" selected>一般</option>
+				            	<option value="1">管理者</option>
+				            </select>
+				        </s:if>
+				        <s:if test="authority == 1 ">
+							<select name="authority">
+				            	<option value="0">一般</option>
+				            	<option value="1" selected>管理者</option>
+				            </select>
+				        </s:if>
 					</td>
 				</tr>
 			</table>
-
+			<input type="hidden" name="allSearch" value="0">
 			<s:submit value="検索"/>
+		</s:form>
+		<s:form action="SearchAction">
+			<input type="hidden" name="allSearch" value="1">
+			<s:submit value="全てのアカウント検索"/>
 		</s:form>
 
 
-    	<s:if test="accountList == null">
+    	<s:if test="empty == 1">
     		<h3>該当する登録情報はありません。</h3>
     	</s:if>
     	<s:elseif test="accountList != null">

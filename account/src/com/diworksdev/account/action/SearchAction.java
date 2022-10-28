@@ -13,14 +13,20 @@ import com.opensymphony.xwork2.ActionSupport;
 public class SearchAction extends ActionSupport implements SessionAware{
 
 //	■インスタンス化、フィールドの宣言
-	private String searchFamilyName;
-	private String searchLastName;
-	private String searchFamilyNameKana;
-	private String searchLastNameKana;
-	private String searchMail;
+	private String familyName;
+	private String lastName;
+	private String familyNameKana;
+	private String lastNameKana;
+	private String mail;
 
-	private String searchGender;
-	private String searchAuthority;
+	private String gender;
+	private String authority;
+
+//	■検索の種類
+//	allSearchが「0」は条件指定での検索、「1」は全データの検索
+	private int allSearch;
+
+	int empty;
 
 
 	public Map<String, Object> session;
@@ -32,7 +38,19 @@ public class SearchAction extends ActionSupport implements SessionAware{
 
 //		■ログイン済み、アカウント権限判定
 		if(session.containsKey("login_user_id") && session.get("authority").equals("1")){
-			accountList = searchDAO.getListUserInfo(searchFamilyName, searchLastName, searchFamilyNameKana, searchLastNameKana, searchMail, searchGender, searchAuthority);
+
+//			■アカウント検索の方法を判定
+//			 「0」なら条件検索、「1」なら全データを検索
+			if(allSearch == 0){
+				accountList = searchDAO.getListUserInfo(familyName, lastName, familyNameKana, lastNameKana, mail, gender, authority);
+
+			}else if(allSearch == 1){
+				accountList = searchDAO.getListUserInfo();
+			}
+
+//			■登録情報の有無判定
+//			「0」なら検索実行後に該当情報あり、「1」なら該当情報なし
+			empty = searchDAO.empty();
 
 			if(accountList == null){
 				return ERROR;
@@ -56,67 +74,80 @@ public class SearchAction extends ActionSupport implements SessionAware{
 	}
 
 //	■getterとsetter
-	public String getSearchFamilyName(){
-		return searchFamilyName;
+	public String getFamilyName(){
+		return familyName;
 	}
-	public void setSearchFamilyName(String searchFamilyName){
-		if(searchFamilyName.equals("")){
-			this.searchFamilyName = "";
+	public void setFamilyName(String familyName){
+		if(familyName.equals("")){
+			this.familyName = "";
 		}else{
-			this.searchFamilyName = searchFamilyName;
+			this.familyName = familyName;
 		}
 	}
-	public String getSearchLastName(){
-		return searchLastName;
+	public String getLastName(){
+		return lastName;
 	}
-	public void setSearchLastName(String searchLastName){
-		if(searchLastName.equals("")){
-			this.searchLastName = "";
+	public void setLastName(String lastName){
+		if(lastName.equals("")){
+			this.lastName = "";
 		}else{
-			this.searchLastName = searchLastName;
+			this.lastName = lastName;
 		}
 	}
-	public String getSearchFamilyNameKana(){
-		return searchFamilyNameKana;
+	public String getFamilyNameKana(){
+		return familyNameKana;
 	}
-	public void setSearchFamilyNameKana(String searchFamilyNameKana){
-		if(searchFamilyNameKana.equals("")){
-			this.searchFamilyNameKana = "";
+	public void setFamilyNameKana(String familyNameKana){
+		if(familyNameKana.equals("")){
+			this.familyNameKana = "";
 		}else{
-			this.searchFamilyNameKana = searchFamilyNameKana;
+			this.familyNameKana = familyNameKana;
 		}
 	}
-	public String getSearchLastNameKana(){
-		return searchLastNameKana;
+	public String getLastNameKana(){
+		return lastNameKana;
 	}
-	public void setSearchLastNameKana(String searchLastNameKana){
-		if(searchLastNameKana.equals("")){
-			this.searchLastNameKana = "";
+	public void setLastNameKana(String lastNameKana){
+		if(lastNameKana.equals("")){
+			this.lastNameKana = "";
 		}else{
-			this.searchLastNameKana = searchLastNameKana;
+			this.lastNameKana = lastNameKana;
 		}
 	}
-	public String getSearchMail(){
-		return searchMail;
+	public String getMail(){
+		return mail;
 	}
-	public void setSearchMail(String searchMail){
-		if(searchMail.equals("")){
-			this.searchMail = "";
+	public void setMail(String mail){
+		if(mail.equals("")){
+			this.mail = "";
 		}else{
-			this.searchMail = searchMail;
+			this.mail = mail;
 		}
 	}
-	public String getSearchGender(){
-		return searchGender;
+	public String getGender(){
+		return gender;
 	}
-	public void setSearchGender(String searchGender){
-		this.searchGender = searchGender;
+	public void setGender(String gender){
+		this.gender = gender;
 	}
-	public String getSearchAuthority(){
-		return searchAuthority;
+	public String getAuthority(){
+		return authority;
 	}
-	public void setSearchAuthority(String searchAuthority){
-		this.searchAuthority = searchAuthority;
+	public void setAuthority(String authority){
+		this.authority = authority;
+	}
+
+	public int getAllSearch(){
+		return allSearch;
+	}
+	public void setAllSearch(int allSearch){
+		this.allSearch = allSearch;
+	}
+	public int getEmpty(){
+		return empty;
+	}
+	public void setEmpty(int empty){
+		this.empty = empty;
 	}
 
 }

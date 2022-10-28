@@ -24,6 +24,8 @@ public class SearchDTO {
 	private String address1;
 	private String address2;
 
+	public String a;
+
 //	■日付のフォーマット変換
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 

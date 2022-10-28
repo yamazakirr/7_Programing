@@ -29,14 +29,14 @@ public class LoginAction extends ActionSupport implements SessionAware{
 //		データベース上のログイン情報を取得するメソッド呼び出し
 
 //			■ログイン済み判定
-//			if(session.containsKey("authority")){
-//				System.out.println("ログイン済み");
-//				System.out.println("ログインID"+session.get("login_user_id"));
-//				System.out.println("アカウント権限"+session.get("authority"));
-//
-//				result = SUCCESS;
-//				return result;
-//			}else{
+			if(session.containsKey("authority")){
+				System.out.println("ログイン済み");
+				System.out.println("ログインID"+session.get("login_user_id"));
+				System.out.println("アカウント権限"+session.get("authority"));
+
+				result = SUCCESS;
+				return result;
+			}else{
 //				■未ログインの場合
 				try{
 //				System.out.println("未ログイン");
@@ -64,8 +64,7 @@ public class LoginAction extends ActionSupport implements SessionAware{
 			return result;
 
 			}
-
-//	}
+	}
 
 
 

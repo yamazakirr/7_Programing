@@ -22,7 +22,9 @@
 
     <s:form action="LoginAction">
 		<s:submit value="TOPページに戻る"/>
+		<input type="hidden" value="<s:property value='authority'/>" name="authority">
 	</s:form>
+	<s:property value="authority"/>
 
     <s:form action="LogoutAction">
 		<s:submit value="ログアウト"/>
