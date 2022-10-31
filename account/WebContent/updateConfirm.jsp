@@ -143,6 +143,9 @@
 			<input type="hidden" name="address2" value="<s:property value='address2'/>">
 			<input type="hidden" name="authority" value="<s:property value='authority'/>">
 
+			<input type="hidden" value="<s:property value='#session.login_user_id'/>">
+    		<input type="hidden" value="<s:property value='#session.authority'/>">
+
 		</div>
       </s:form>
     </div>

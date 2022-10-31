@@ -21,7 +21,7 @@
 </head>
 <body>
 
-	アカウント権限 : <s:property value="authority"/>
+	アカウント権限 : <s:property value="#session.authority"/>
 
 	<div id="header">
 		<ul>
@@ -33,7 +33,7 @@
 			<li>その他</li>
 
 			<!-- アカウント権限が「管理者」の人のみ表示 -->
-			<s:if test="authority == 1">
+			<s:if test="#session.authority == 1 && #session.login_user_id != null">
 				<li><a href='<s:url action="RegistAction"/>'>アカウント登録</a></li>
 				<li><a href='<s:url action="ListAction"/>'>アカウント一覧</a></li>
 			</s:if>

@@ -3,11 +3,13 @@ package com.diworksdev.account.action;
 import java.util.ArrayList;
 import java.util.Map;
 
+import org.apache.struts2.interceptor.SessionAware;
+
 import com.diworksdev.account.dto.UpdateDTO;
 import com.opensymphony.xwork2.ActionSupport;
 
 
-public class UpdateConfirmAction extends ActionSupport{
+public class UpdateConfirmAction extends ActionSupport implements SessionAware{
 
 
 
@@ -288,5 +290,9 @@ public class UpdateConfirmAction extends ActionSupport{
 		return this.updateList;
 	}
 
+//	@Override
+	public void setSession(Map<String, Object> session){
+		this.session = session;
+	}
 
 }

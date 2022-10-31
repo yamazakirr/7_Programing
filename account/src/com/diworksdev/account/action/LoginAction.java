@@ -21,15 +21,16 @@ public class LoginAction extends ActionSupport implements SessionAware{
 	LoginDAO dao = new LoginDAO();
 
 	public String execute(){
-		System.out.println("loginUserId : "+loginUserId);
-		System.out.println("loginUserPassword : "+loginUserPassword);
+		System.out.println("loginUserId : "+session.get("login_user_id"));
+		System.out.println("loginUserPassword : "+session.get("loginUserPassword"));
+		System.out.println("authority : "+session.get("authority"));
 
 		String result = ERROR;
 
 //		データベース上のログイン情報を取得するメソッド呼び出し
 
 //			■ログイン済み判定
-			if(session.containsKey("authority")){
+			if(session.containsKey("authority") && session.containsKey("login_user_id")){
 				System.out.println("ログイン済み");
 				System.out.println("ログインID"+session.get("login_user_id"));
 				System.out.println("アカウント権限"+session.get("authority"));
@@ -39,14 +40,14 @@ public class LoginAction extends ActionSupport implements SessionAware{
 			}else{
 //				■未ログインの場合
 				try{
-//				System.out.println("未ログイン");
+				System.out.println("未ログイン");
 				result = dao.getLoginResult(loginUserId, loginUserPassword);
 				setAuthority(dao.getAuthority());
 
 				String loginErrorMessage = dao.getLoginErrorMessage();
 				if(loginErrorMessage.equals("")){
 
-					//				■sessionにmailとauthorityの情報を格納
+//					■sessionにmailとauthorityの情報を格納
 					session.put("login_user_id", loginUserId);
 					session.put("authority", authority);
 				}else{
@@ -99,5 +100,8 @@ public class LoginAction extends ActionSupport implements SessionAware{
 //	@Override
 	public void setSession(Map<String, Object> session){
 		this.session = session;
+	}
+	public Map<String, Object> getSession(){
+		return session;
 	}
 }

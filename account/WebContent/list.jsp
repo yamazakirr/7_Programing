@@ -23,8 +23,10 @@
 
     <div id="main">
 
-    	<s:property value="#session.login_user_id"/>
+    	<s:property value="#session.login_user_id"/><br>
     	<s:property value="#session.authority"/><br>
+
+
 
 
 
@@ -124,6 +126,8 @@
     					<s:form action="DeleteAction">
     						<s:submit value="削除"/>
 							<input type="hidden" value='<s:property value="id"/>' name="id">
+							<input type="hidden" value="<s:property value='#session.login_user_id'/>">
+    						<input type="hidden" value="<s:property value='#session.authority'/>">
     					</s:form>
     				</td>
 
@@ -142,6 +146,9 @@
     						<input type="hidden" value='<s:property value="prefecture"/>' name="prefecture">
     						<input type="hidden" value='<s:property value="address1"/>' name="address1">
     						<input type="hidden" value='<s:property value="address2"/>' name="address2">
+
+    						<input type="hidden" value="<s:property value='#session.login_user_id'/>">
+    						<input type="hidden" value="<s:property value='#session.authority'/>">
     					</s:form>
     				</td>
     			</tr>

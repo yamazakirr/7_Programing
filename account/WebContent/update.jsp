@@ -268,6 +268,8 @@
 		<div class="button">
 			<s:submit class="b" value="確認する"/>
 			<input type="hidden" name="id" value="<s:property value='id'/>">
+			<input type="hidden" value="<s:property value='#session.login_user_id'/>">
+    		<input type="hidden" value="<s:property value='#session.authority'/>">
 		</div>
 
     </s:form>

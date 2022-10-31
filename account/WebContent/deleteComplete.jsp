@@ -22,7 +22,8 @@
 
     <s:form action="LoginAction">
 		<s:submit value="TOPページに戻る"/>
-		<input type="hidden" value="<s:property value='authority'/>" name="authority">
+		<input type="hidden" value="<s:property value='#session.login_user_id'/>">
+    	<input type="hidden" value="<s:property value='#session.authority'/>">
 	</s:form>
 	<s:property value="authority"/>
 

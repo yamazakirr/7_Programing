@@ -26,7 +26,8 @@
 		<s:form action="DeleteCompleteAction">
 			<s:submit value="削除する"/>
 			<input type="hidden" value="<s:property value='id'/>" name="id">
-			<input type="hidden" value="<s:property value='authority'/>" name="authority">
+			<input type="hidden" value="<s:property value='#session.login_user_id'/>">
+    		<input type="hidden" value="<s:property value='#session.authority'/>">
 		</s:form>
     </div>
 

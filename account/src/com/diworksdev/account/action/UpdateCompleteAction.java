@@ -5,10 +5,12 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.Map;
 
+import org.apache.struts2.interceptor.SessionAware;
+
 import com.diworksdev.account.dao.UpdateCompleteDAO;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class UpdateCompleteAction extends ActionSupport{
+public class UpdateCompleteAction extends ActionSupport implements SessionAware{
 
 	public Map<String, Object> session;
 
@@ -172,6 +174,11 @@ public class UpdateCompleteAction extends ActionSupport{
 		}else if(authority.equals("管理者")){
 			this.authority = "1";
 		}
+	}
+
+//	@Override
+	public void setSession(Map<String, Object> session){
+		this.session = session;
 	}
 
 }

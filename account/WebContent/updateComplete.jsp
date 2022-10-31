@@ -15,6 +15,9 @@
 <div>
 	<s:form action="LoginAction">
 		<s:submit value="TOPページに戻る"/>
+
+		<input type="hidden" value="<s:property value='#session.login_user_id'/>">
+    	<input type="hidden" value="<s:property value='#session.authority'/>">
 	</s:form>
 
 	<s:form action="LogoutAction">
