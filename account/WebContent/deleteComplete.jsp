@@ -20,8 +20,8 @@
 	    <h1>削除完了しました</h1>
     </div>
 
-    <s:form action="LoginAction">
-		<s:submit value="TOPページに戻る"/>
+    <s:form action="index.jsp">
+		<s:submit value="TOPページへ戻る"/>
 		<input type="hidden" value="<s:property value='#session.login_user_id'/>">
     	<input type="hidden" value="<s:property value='#session.authority'/>">
 	</s:form>

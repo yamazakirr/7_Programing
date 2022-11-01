@@ -23,12 +23,6 @@
 
     <div id="main">
 
-    	<s:property value="#session.login_user_id"/><br>
-    	<s:property value="#session.authority"/><br>
-
-
-
-
 
 		<s:form action="SearchAction">
 			<table border="1">

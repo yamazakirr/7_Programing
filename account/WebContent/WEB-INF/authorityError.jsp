@@ -6,23 +6,25 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>アカウント更新完了画面</title>
+<title>アカウント権限エラー画面</title>
+
+<style type="text/css">
+
+h1{
+	color:red;
+}
+
+
+</style>
+
 </head>
 <body>
 
-<h1>アカウントの更新が完了しました。</h1>
+<h1>アカウント権限がありません。</h1>
 
-<div>
 	<s:form action="index.jsp">
 		<s:submit value="TOPページへ戻る"/>
-		<input type="hidden" value="<s:property value='#session.login_user_id'/>">
-    	<input type="hidden" value="<s:property value='#session.authority'/>">
 	</s:form>
-
-	<s:form action="LogoutAction">
-		<s:submit value="ログアウト"/>
-	</s:form>
-</div>
 
 </body>
 </html>

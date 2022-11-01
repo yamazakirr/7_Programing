@@ -28,10 +28,6 @@
 
 	<s:form action="UpdateConfirmAction">
 
-
-
-
-
 	<table>
 
 		<tr>
