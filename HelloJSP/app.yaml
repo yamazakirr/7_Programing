@@ -1,5 +1,9 @@
 runtime: java8
 
+handlers:
+- url: /stylesheets
+  static_dir: stylesheets
+
 
 
 
