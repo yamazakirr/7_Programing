@@ -3,6 +3,11 @@
     <groupId>portfolio-379822</groupId>
     <artifactId>portfolio-379822</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    
+    <prerequisites>
+     <maven>3.2.5</maven>
+    </prerequisites>
+    
     <packaging>war</packaging>
     <build>
     <sourceDirectory>src</sourceDirectory>
@@ -128,10 +133,6 @@
         </dependency>
 
         <!-- [End] for Google App Engine -->
-        
-        <prerequisites>
-         <maven>3.2.5</maven>
-        </prerequisites>
         
   </dependencies>
 </project>
